@@ -1,0 +1,24 @@
+    version: '3.7'
+
+    services:
+      apache:
+        build:
+          context: ./apache
+          dockerfile: ubuntu
+        image: eactivos_apache
+        container_name: eactivos_apache
+        hostname: 'eactivos_apache'
+        ports:
+          - '80:80'
+        depends_on: [mysql]
+        volumes:
+          - ../:/var/www/html
+
+      mysql:
+        build:
+          context: ./mysql
+          dockerfile: mysql-dockerfile
+        image: eactivos-mysql
+        hostname: eactivos-mysql
+        ports:
+           - '3306:3306'
