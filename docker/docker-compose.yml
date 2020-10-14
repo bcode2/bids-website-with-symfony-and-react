@@ -1,24 +1,97 @@
-    version: '3.7'
-
-    services:
-      apache:
+version: '3.7'
+services:
+    eactivos_bd:
+        image: ${CONTAINER_REGISTRY_BASE}/mariadb
+        container_name: ${CONTAINER_REGISTRY_BASE}_bd
         build:
-          context: ./apache
-          dockerfile: ubuntu
-        image: eactivos_apache
-        container_name: eactivos_apache
-        hostname: 'eactivos_apache'
-        ports:
-          - '80:80'
-        depends_on: [mysql]
+            target: ${CONTAINER_REGISTRY_BASE}_bd
+            context: bd
         volumes:
-          - ../:/var/www/html
-
-      mysql:
-        build:
-          context: ./mysql
-          dockerfile: mysql-dockerfile
-        image: eactivos-mysql
-        hostname: eactivos-mysql
+            - dbdata:/var/lib/mysql
+        env_file:
+            - ./.env
         ports:
-           - '3306:3306'
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${DATABASE_NAME_SYSTEM}
+            MYSQL_USER: ${DATABASE_USER_SYSTEM}
+            MYSQL_PASSWORD: ${DATABASE_PASS_SYSTEM}
+            DATABASE_HOST_SYSTEM: ${DATABASE_HOST_SYSTEM}
+            DATABASE_PORT_SYSTEM: ${DATABASE_PORT_SYSTEM}
+            DATABASE_NAME_SYSTEM: ${DATABASE_NAME_SYSTEM}
+            DATABASE_USER_SYSTEM: ${DATABASE_USER_SYSTEM}
+            DATABASE_PASS_SYSTEM: ${DATABASE_PASS_SYSTEM}
+            DATABASE_HOST_PROVIDER: ${DATABASE_HOST_PROVIDER}
+            DATABASE_PORT_PROVIDER: ${DATABASE_PORT_PROVIDER}
+            DATABASE_NAME_PROVIDER: ${DATABASE_NAME_PROVIDER}
+            DATABASE_USER_PROVIDER: ${DATABASE_USER_PROVIDER}
+            DATABASE_PASS_PROVIDER: ${DATABASE_PASS_PROVIDER}
+        networks:
+            - eactivos-network
+
+    eactivos_php7:
+        image: ${CONTAINER_REGISTRY_BASE}/php7-fpm
+        user: $UID:$GID
+        stdin_open: true
+        container_name: ${CONTAINER_REGISTRY_BASE}_php7
+        build:
+            target: eactivos_php-fpm
+            context: php7-fpm
+            args:
+                TIMEZONE: ${TIMEZONE}
+        env_file:
+            - ./.env
+        volumes:
+            - ${DIRECTORY_WEB}:/var/www/html
+            - /etc/group:/etc/group:ro
+            - /etc/passwd:/etc/passwd:ro
+            - /etc/shadow:/etc/shadow:ro
+            - /home/${USER}:/home/${USER}
+            - eactivos-var:/var/www/html/eactivos/var/cache
+            - eactivos-var:/var/www/html/eactivos/var/logs
+            - eactivos-var:/var/www/html/eactivos/var/spool
+            - eactivos-var:/var/www/html/eactivos/var/sessions
+        links:
+            - eactivos_bd
+        depends_on:
+            - eactivos_bd
+        tty: true
+        networks:
+            - eactivos-network
+
+    eactivos_apache:
+        image: ${CONTAINER_REGISTRY_BASE}/apache_php7
+        container_name: ${CONTAINER_REGISTRY_BASE}_apache
+        env_file:
+            - ./.env
+        build:
+            context: apache
+            target: eactivos_apache
+        links:
+            - eactivos_php7
+        depends_on:
+            - eactivos_php7
+        restart: always
+        volumes:
+            - ${DIRECTORY_WEB}:/var/www/html
+        ports:
+            - "8089:80"
+        networks:
+            - eactivos-network
+
+
+
+#Docker Networks
+networks:
+    eactivos-network:
+        driver: bridge
+
+#Volumes
+volumes:
+    dbdata:
+        driver: local
+    eactivos-var:
+        driver_opts:
+            type: tmpfs
+            device: tmpfs
