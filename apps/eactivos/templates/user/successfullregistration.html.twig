@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div style="text-align:center;padding-top:30px;">
+        <h1 class="h3 mb-3 font-weight-normal"> Se ha registrado
+            con éxito.En breve le redirijimos al homepage </h1>
+        <div id="counter" style="font-size:80px; font-weight:bold;color:red;padding:40pxwidth: 100px;border-color:black;
+    height: 100px;;text-align:center;border-radius:50%">5
+        </div>
+    </div>
+    <script>
+        setInterval(function () {
+            var div = document.querySelector("#counter");
+            var count = div.textContent * 1 - 1;
+            div.textContent = count;
+            if (count <= 0) {
+                window.location.replace("/");
+            }
+        }, 1000);
+    </script>
+{% endblock %}

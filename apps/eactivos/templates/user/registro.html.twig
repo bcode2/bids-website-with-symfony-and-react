@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <div style="width:80%;margin: 40px auto 40px auto;text-align:center;background: white;">
+        <div class="registerform">
+            <h1 class="h3 mb-3 font-weight-normal"> Formulario de Registro </h1>
+            {{ form_start(form) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.surname) }}
+            {{ form_row(form.plainPassword.first) }}
+            {{ form_row(form.plainPassword.second) }}
+            <button type="submit" class="btn btn-primary" style="margin:10px auto;">Registrarse</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

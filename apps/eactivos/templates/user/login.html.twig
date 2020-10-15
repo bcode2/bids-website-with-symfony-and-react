@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div style="max-width:300px;margin:auto; text-align:center;padding:20px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>Logearse en el Sistema</h3>
+                    {% if error %}
+                        <div class="alert alert-danger">
+                            {{ error.messageKey|trans(error.messageData, 'security') }}
+                        </div>
+                    {% endif %}
+                    {{ form_start(form) }}
+                    {{ form_row(form._username) }}
+                    {{ form_row(form._password) }}
+                    <button
+                            type="submit" class="btn btn-success" style="margin:15px;">
+                        Login <span class="fa fa-lock"></span>
+                    </button>
+                    {{ form_end(form) }}
+                    <p><b>Si no está registrado vaya <a href="{{ path('user_registration') }}">AQUÍ</a><b></p>
+                    <br>
+                    <p>CREDENCIALES DE ADMINISTRADOR:</p>
+                    <br>
+                    <p>email:&nbsp;&nbsp;<span style="color:red;">bcode@protonmail.com</span></p>
+                    <p>clave:&nbsp;&nbsp;<span style="color:red;">password</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
