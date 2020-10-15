@@ -1,3 +1,4 @@
+#!/bin/bash
 # Copyright (c) 2017, Oracle and/or its affiliates. All rights reserved.
 #
 # This program is free software; you can redistribute it and/or modify
@@ -12,28 +13,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
-FROM oraclelinux:7-slim as  eactivos_bd
 
-ARG MYSQL_SERVER_PACKAGE=mysql-community-server-minimal-5.7.31
-ARG MYSQL_SHELL_PACKAGE=mysql-shell-8.0.21
-
-# Install server
-RUN yum install -y https://repo.mysql.com/mysql-community-minimal-release-el7.rpm \
-      https://repo.mysql.com/mysql-community-release-el7.rpm \
-  && yum-config-manager --enable mysql57-server-minimal \
-  && yum install -y \
-      $MYSQL_SERVER_PACKAGE \
-      $MYSQL_SHELL_PACKAGE \
-      libpwquality \
-  && yum clean all \
-  && mkdir /docker-entrypoint-initdb.d
-
-VOLUME /var/lib/mysql
-
-COPY docker-entrypoint.sh /entrypoint.sh
-COPY healthcheck.sh /healthcheck.sh
-ENTRYPOINT ["/entrypoint.sh"]
-HEALTHCHECK CMD /healthcheck.sh
-EXPOSE 3306 33060
-CMD ["mysqld"]
-
+# The mysql-init-complete file is touched by the entrypoint file before the
+# main server process is started
+if [ -f /mysql-init-complete ]; # The entrypoint script touches this file
+then # Ping server to see if it is ready
+  mysqladmin --defaults-extra-file=/healthcheck.cnf ping
+else # Initialization still in progress
+  exit 1
+fi
