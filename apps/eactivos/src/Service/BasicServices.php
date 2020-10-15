@@ -12,5 +12,3 @@ class BasicServices
         return true;
     }
 }
-
-

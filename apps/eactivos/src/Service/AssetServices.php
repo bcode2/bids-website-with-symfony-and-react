@@ -10,7 +10,7 @@ class AssetServices extends BasicServices
 
 {
     private $repository;
-    private $em;
+    protected $em;
     private $container;
 
     public function __construct(Container $container, EntityManager $em)
@@ -30,7 +30,7 @@ class AssetServices extends BasicServices
         return $this->repository->findByCategory($name);
     }
 
-    public function createasset(Asset $asset): int
+    public function createAsset(Asset $asset): int
     {
         $this->em->persist($asset);
         $this->flushObjects();
@@ -38,11 +38,11 @@ class AssetServices extends BasicServices
         return $asset->getId();
     }
 
-    public function deleteAsset(int $id): string
+    public function deleteAsset(int $id): int
     {
         $asset = $this->getById($id);
         if (!$asset) {
-            return ("No existe el asset");
+            return ("No existe la subasta especificada");
         }
         $this->em->remove($id);
         $this->flushObjects();
