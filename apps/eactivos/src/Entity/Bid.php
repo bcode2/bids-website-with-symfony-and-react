@@ -15,8 +15,15 @@ class Bid
 {
 
 
+    public function setUser()
+    {
+    }
 
+    public function setPrice($randomFloat)
+    {
+    }
 
-
-
+    public function setAsset($getRandomReference)
+    {
+    }
 }
