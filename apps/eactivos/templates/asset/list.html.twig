@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div style="width:80%;margin: 40px auto 40px auto;text-align:center;background: white;">
+
+        <h1>LISTADO DE SUBASTAS</h1>
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Categoría</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for asset in assets %}
+                <tr>
+                    <td><a href="{{ path('asset_show', { 'id': asset.id }) }}">{{ asset.id }}</a></td>
+                    <td><img style="width:30px;" src="{{ asset(asset.img,'img') }}"></td>
+                    <td>{{ asset.name }}</td>
+                    <td>{{ asset.price }}</td>
+                    <td>{{ asset.category }}</td>
+                    <td>
+                        <ul>
+                            <li style="display:inline;">
+                                <a href="{{ path('asset_show', { 'id': asset.id }) }}"><img alt="show"
+                                                                                            style="width:20px;"
+                                                                                            src="{{ asset('viewicon.svg','img') }}"></a>
+                            </li>
+                            <li style="display:inline;">
+                                <a href="{{ path('asset_edit', { 'id': asset.id }) }}"><img alt="editar"
+                                                                                            style="width:20px;margin:auto 5px auto 5px;"
+                                                                                            src="{{ asset('editicon.svg','img') }}"></a>
+                            </li>
+                            <li style="display:inline;">
+                                <a href="{{ path('asset_delete', { 'id': asset.id }) }}"><img alt="delete"
+                                                                                              style="width:20px;"
+                                                                                              src="{{ asset('deleteicon.svg','img') }}"></a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <ul>
+            <li>
+                <a href="{{ path('asset_new') }}">
+                    <button type="button" class="btn btn-primary btn-lg">Agregar subasta</button>
+                </a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

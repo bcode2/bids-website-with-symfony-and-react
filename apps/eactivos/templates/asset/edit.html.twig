@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div style="width:80%;margin: 40px auto 40px auto;text-align:center;padding: 0 200px 0 200px;background: white;">
+        <h3>EDICIÓN DE LA SUBASTA</h3>
+
+        {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+
+        <button type="submit" value="Edit" class="btn btn-warning btn-lg btn-block" style="margin: 10px 0;">Guardar
+            cambios
+        </button>
+        {{ form_end(edit_form) }}
+        <ul>
+            <li>
+                <a href="{{ path('asset_list') }}">
+                    <button type="button" class="btn btn-primary btn-lg btn-block" style="margin: 10px 0;">Regresar al
+                        listado
+                    </button>
+                </a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                <button type="submit" value="Delete" class="btn btn-danger btn-lg btn-block" style="margin: 10px 0;">
+                    Borrar subasta
+                </button>
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div style="width:80%;margin: 40px auto 40px auto;text-align:center;padding: 0 200px 0 200px;background: white;">
+        <h1>Detalles del asseto</h1>
+
+        <table style="text-align: left;paddin-left:30px;">
+            <tbody>
+            <tr>
+                <th style="text-align: right;">Id</th>
+                <td style="width:20px;"></td>
+                <td>{{ asset.id }}</td>
+
+            </tr>
+            <tr>
+                <th style="text-align: right;">Nombre</th>
+                <td></td>
+                <td>{{ asset.name }}</td>
+            </tr>
+            <tr>
+                <th style="text-align: right;">Precio</th>
+                <td></td>
+                <td>{{ asset.price }}</td>
+            </tr>
+            <tr>
+                <th style="text-align: right;">Código</th>
+                <td></td>
+                <td>{{ asset.code }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div><img style="width: 350px;display:inline-block;" src="{{ asset(asset.img,'img') }}"></div>
+
+        <ul>
+            <li>
+                <a href="{{ path('asset_list') }}">
+                    <button type="button" class="btn btn-primary btn-lg btn-block" style="margin: 10px 0;">Regresar al
+                        listado
+                    </button>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('asset_edit', { 'id': asset.id }) }}">
+                    <button type="button" class="btn btn-warning btn-lg btn-block" style="margin: 10px 0;">Editar
+                        subasta
+                    </button>
+                </a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+
+                <button type="submit" value="Delete" class="btn btn-danger btn-lg btn-block" style="margin: 10px 0;">
+                    Borrar subasta
+                </button>
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </div>
+{% endblock %}
