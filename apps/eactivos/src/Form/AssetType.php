@@ -16,7 +16,15 @@ class AssetType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', TextType::class, ['label' => 'Nombre de la subasta'])->add('price', TextType::class, ['label' => 'Precio'])->add(
+        $builder->add(
+            'name',
+            TextType::class,
+            ['label' => 'Nombre de la subasta']
+        )->add(
+            'price',
+            TextType::class,
+            ['label' => 'Precio']
+        )->add(
             'img',
             HiddenType::class,
             ['attr' => ['value' => 'subasta.jpg']]
