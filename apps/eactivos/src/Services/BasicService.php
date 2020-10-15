@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class BasicServices
+class BasicService
 {
     /*Will  persists all  object  changes in the  UnitofWork*/
     protected function flushObjects(): bool

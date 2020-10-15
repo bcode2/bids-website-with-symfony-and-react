@@ -6,7 +6,7 @@ use App\Entity\Asset;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 
-class AssetServices extends BasicServices
+class AssetService extends BasicService
 
 {
     private $repository;
