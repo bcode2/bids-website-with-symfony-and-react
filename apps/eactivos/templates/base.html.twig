@@ -2,7 +2,7 @@
 <html lang="es" style="height: 100%;">
 
 <head>
-    <title>{% block title %}Bienvenido  a la tienda de GeeksHubs{% endblock %}</title>
+    <title>{% block title %}Bienvenido a la página de subastas  online{% endblock %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> {% block stylesheets %}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -16,8 +16,8 @@
 </head>
 
 <body style="position: relative; min-height: 100%; top: 0px;">
-<div class="appcontainer">
- {#   {% include 'header.html.twig' %}#}
+<div class="appcontainer" style="text-align: center;">
+    {#   {% include 'header.html.twig' %}#}
     {% block body %}{% endblock %}
     <footer margin-top: 25px;>
     {% include 'oficinas.html.twig' %}
