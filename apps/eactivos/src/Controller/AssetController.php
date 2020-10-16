@@ -99,20 +99,21 @@ class AssetController extends AbstractController
      *
      * @return RedirectResponse|Response
      */
-    public function editAction(Request $request, Asset $asset)
+    public function editAction(Request $request, Asset $asset, AssetService $assetService)
     {
         $deleteForm = $this->createDeleteForm($asset);
         $editForm = $this->createForm(AssetType::class, $asset);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $assetService->update();
+            $this->addFlash('success', 'La subasta ha sido actualizada correctamente');
 
             return $this->redirectToRoute('asset_edit', ['id' => $asset->getId()]);
         }
 
         return $this->render(
-            'Asset/edit.html.twig',
+            'asset/edit.html.twig',
             [
                 'asset' => $asset,
                 'edit_form' => $editForm->createView(),

@@ -24,13 +24,13 @@ class Bid
 
     /**
      * @var Asset
-     * @ORM\ManyToOne(targetEntity="Asset",inversedBy="bids", cascade="remove")
+     * @ORM\ManyToOne(targetEntity="Asset",inversedBy="bids")
      */
     private $asset;
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="bids",cascade="remove")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="bids")
      */
     private $user;
 

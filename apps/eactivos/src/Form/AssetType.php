@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Asset;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,10 +25,10 @@ class AssetType extends AbstractType
             TextType::class,
             ['label' => 'Precio']
         )->add(
-            'img',
-            HiddenType::class,
-            ['attr' => ['value' => 'subasta.jpg']]
-        )->add('category');
+            'description',
+            TextareaType::class,
+            ['label' => 'description']
+        );
     }
 
     /**

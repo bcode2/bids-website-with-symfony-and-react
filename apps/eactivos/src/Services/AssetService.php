@@ -66,15 +66,9 @@ class AssetService extends AbstractEntityService
         return $this->repository->find($id);
     }
 
-    public function update(Asset $asset): bool
+    public function update(): void
     {
-        try {
-            $this->flushObjects();
-
-            return true;
-        } catch (Exception $e) {
-            return false;
-        }
+        $this->getEntityManager()->flush();
     }
 
     /**

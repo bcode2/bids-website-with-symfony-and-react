@@ -50,8 +50,8 @@ class Asset
     private $endDate;
 
     /**
-     * @var Collection
-     * @ORM\OneToMany(targetEntity="Bid" ,mappedBy="asset")
+     * @var Collection|Bid[]
+     * @ORM\OneToMany(targetEntity="Bid", mappedBy="asset", cascade={"persist", "remove"})
      */
     private $bids;
 
