@@ -3,21 +3,23 @@
 namespace App\Services;
 
 use App\Entity\Asset;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\DependencyInjection\ContainerInterface as Container;
+use App\Repository\AssetRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectRepository;
 
-class AssetService extends BasicService
+class AssetService extends AbstractEntityService
 
 {
     private $repository;
     protected $em;
-    private $container;
 
-    public function __construct(Container $container, EntityManager $em)
-    {
-        $this->container = $container;
-        $this->em = $em;
-        $this->repository = $this->em->getRepository('App:Asset');
+    /**
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(
+        EntityManagerInterface $entityManager
+    ) {
+        parent::__construct($entityManager);
     }
 
     public function getAll(): array
@@ -25,12 +27,20 @@ class AssetService extends BasicService
         return $this->repository->findAll();
     }
 
-    public function findByCategory($name)
+    /**
+     * @param $id
+     *
+     * @return Asset|object|null
+     */
+    public function findOneById(int $id): Asset
     {
-        return $this->repository->findByCategory($name);
+        dump($this->getRepository()->find($id));
+
+        return $this->getRepository()->find($id);
     }
 
-    public function createAsset(Asset $asset): int
+
+    public function create(Asset $asset): int
     {
         $this->em->persist($asset);
         $this->flushObjects();
@@ -38,16 +48,17 @@ class AssetService extends BasicService
         return $asset->getId();
     }
 
-    public function deleteAsset(int $id): int
+    /**
+     * @param Asset $entity
+     *
+     * @return Asset
+     */
+    public function delete(Asset $entity): Asset
     {
-        $asset = $this->getById($id);
-        if (!$asset) {
-            return ("No existe la subasta especificada");
-        }
-        $this->em->remove($id);
-        $this->flushObjects();
+        $this->getEntityManager()->remove($entity);
+        $this->getEntityManager()->flush();
 
-        return ("Subasta Borrada");
+        return $entity;
     }
 
     public function getById(int $id)
@@ -55,7 +66,7 @@ class AssetService extends BasicService
         return $this->repository->find($id);
     }
 
-    public function updateAsset(Asset $asset): bool
+    public function update(Asset $asset): bool
     {
         try {
             $this->flushObjects();
@@ -64,5 +75,13 @@ class AssetService extends BasicService
         } catch (Exception $e) {
             return false;
         }
+    }
+
+    /**
+     * @return AssetRepository|ObjectRepository
+     */
+    public function getRepository(): ObjectRepository
+    {
+        return $this->getEntityManager()->getRepository(Asset::class);
     }
 }

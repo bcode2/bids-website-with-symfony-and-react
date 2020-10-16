@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Asset;
 use App\Form\AssetType;
+use App\Services\AssetService;
+use AppBundle\Provider\Model\MessageList;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -124,33 +126,30 @@ class AssetController extends AbstractController
      *
      * @Route("/{id}/delete", name="asset_delete")
      * @param Request $request
-     * @param Asset $asset
+     * @param int $id
+     *
+     * @param AssetService $assetService
      *
      * @return RedirectResponse
      */
-    public function deleteAction(Request $request, Asset $asset)
+    public function deleteAction(Request $request, int $id, AssetService $assetService): RedirectResponse
     {
-        /* check this  funtion  why is not  validating the form  DONT FORGET IT CARLOS*/
-        $form = $this->createDeleteForm($asset);
-        $form->handleRequest($request);
+        $entity = $assetService->findOneById($id);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($asset);
-        try {
-            $em->flush();
-
-            return $this->redirectToRoute('asset_list');
-        } catch (\Exception $e) {
-            /* $logger = $this->get('logger');
-             $error = "Ha intentado  eliminar una subasta";
-             $logger->error($error);*/
+        if (!$entity) {
+            $this->addFlash('warning', 'La subasta que desea borrar no existe');
 
             return $this->redirectToRoute('asset_list');
         }
+
+        $assetService->delete($entity);
+        $this->addFlash('success', 'La subasta ha sido borrada correctamente');
+
+        return $this->redirectToRoute('asset_list');
     }
 
     /**
-     * Creates a form to delete a Asset entity.
+     * Creates a form to delete an Asset entity.
      *
      * @param Asset $asset The Asset entity
      *
