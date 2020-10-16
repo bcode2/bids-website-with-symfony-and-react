@@ -52,5 +52,7 @@ services:
         autowire: false
         public: true
         autoconfigure: false
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+
+    app.security.login_form_authenticator:
+        class: App\Services\LoginFormAuthenticator
+

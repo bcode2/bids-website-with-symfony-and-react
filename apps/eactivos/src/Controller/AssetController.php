@@ -49,7 +49,9 @@ class AssetController extends AbstractController
     public function newAction(Request $request)
     {
         $asset = new Asset();
-        $form = $this->createForm(AssetType::class, $asset);
+
+        $form = $this->createAssetForm($asset);
+        // $form = $this->createForm(AssetType::class, $asset);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -96,6 +98,8 @@ class AssetController extends AbstractController
      * @Route("/{id}/edit", name="asset_edit")
      * @param Request $request
      * @param Asset $asset
+     *
+     * @param AssetService $assetService
      *
      * @return RedirectResponse|Response
      */
@@ -159,5 +163,24 @@ class AssetController extends AbstractController
     private function createDeleteForm(Asset $asset): FormInterface
     {
         return $this->createFormBuilder()->setAction($this->generateUrl('asset_delete', ['id' => $asset->getId()]))->setMethod('DELETE')->getForm();
+    }
+
+    /**
+     * @param Asset $asset
+     *
+     * @return FormInterface
+     */
+    private function createAssetForm(Asset $asset): FormInterface
+    {
+        $form = $this->createForm(
+            AssetType::class,
+            $asset,
+            [
+                'action' => $this->generateUrl('asset_new'),
+                'method' => 'POST',
+            ]
+        );
+
+        return $form;
     }
 }

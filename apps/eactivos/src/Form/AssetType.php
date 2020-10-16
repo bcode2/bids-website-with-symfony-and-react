@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Asset;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,6 +30,26 @@ class AssetType extends AbstractType
             'description',
             TextareaType::class,
             ['label' => 'description']
+        )->add(
+            'endDate',
+            DateType::class,
+            [
+                'widget' => 'choice',
+            ]
+        );
+
+        $builder->get('endDate')->addModelTransformer(
+            new CallbackTransformer(
+                function ($value) {
+                    if (!$value) {
+                        return new \DateTime('now +1 month');
+                    }
+
+                    return $value;
+                }, function ($value) {
+                return $value;
+            }
+            )
         );
     }
 
@@ -50,4 +72,6 @@ class AssetType extends AbstractType
     {
         return 'appbundle_product';
     }
+
+
 }

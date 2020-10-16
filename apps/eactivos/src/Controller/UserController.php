@@ -22,20 +22,26 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class UserController extends AbstractController
 {
     /**
-     * @Route("login", name="security_login")
+     * @Route("login", name="user_login")
+     * @param AuthenticationUtils $authenticationUtils
+     *
+     * @return Response
      */
     public function loginAction(AuthenticationUtils $authenticationUtils): Response
     {
-        // $authenticationUtils = $this->get('security.authentication_utils');
+        //$authenticationUtils = $this->get('security.authentication_utils');
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
+        dump($error);
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        dump($lastUsername);
         $form = $this->createForm(
             LoginForm::class,
             [
-                '_username' => $lastUsername,
+                'last_username' => $lastUsername,
+                'error' => $error,
             ]
         );
 
@@ -71,24 +77,27 @@ class UserController extends AbstractController
     public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
+        $user->setIsAdmin();
         $form = $this->createForm(UserType::class, $user);
-
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
 
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            $this->addFlash('error', 'Ha habido un error al procesar su solicitud de alta');
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->render('user/successfullregistration.html.twig');
+            return $this->render(
+                'user/registro.html.twig',
+                ['form' => $form->createView()]
+            );
         }
 
-        return $this->render(
-            'user/registro.html.twig',
-            ['form' => $form->createView()]
-        );
+        $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+        $user->setPassword($password);
+        $this->addFlash('success', 'Se ha dado de alta correctamente en el sistema');
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('asset_list');
     }
 }

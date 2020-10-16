@@ -18,6 +18,7 @@
                 <th class="text-center">Id</th>
                 <th class="text-center">Empresa</th>
                 <th class="text-center">Precio Inicial de Venta</th>
+                <th class="text-center">Fecha Vencimiento</th>
                 <th class="text-center">Acciones</th>
             </tr>
             </thead>
@@ -27,6 +28,7 @@
                     <td><a href="{{ path('asset_show', { 'id': asset.id }) }}">{{ asset.id }}</a></td>
                     <td>{{ asset.name }}</td>
                     <td>{{ asset.price }}</td>
+                    <td>{{ asset.endDate |date("m/d/Y") }}</td>
                     <td>
                         <ul class="text-center">
                             <li style="display:inline;">

@@ -80,7 +80,7 @@ class Asset
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -96,7 +96,7 @@ class Asset
     /**
      * @return DateTime
      */
-    public function getEndDate(): DateTime
+    public function getEndDate(): ?DateTime
     {
         return $this->endDate;
     }
@@ -138,7 +138,7 @@ class Asset
      *
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -160,9 +160,9 @@ class Asset
     /**
      * Get price.
      *
-     * @return string
+     * @return int
      */
-    public function getPrice(): string
+    public function getPrice(): ?int
     {
         return $this->price;
     }
