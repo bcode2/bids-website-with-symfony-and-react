@@ -51,16 +51,24 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     public function supports(Request $request): ?bool
     {
         return $request->request->has('_username') && $request->request->has('_password');
+        //return true;
+    }
+
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    {
+
+        throw new AuthenticationException ("xxxxxx");
     }
 
     public function getCredentials(Request $request)
     {
-        if (!$request->headers->has('Authorization')) {
-            throw new AuthenticationException("getCredentials");
-        }
+        /* if (!$request->headers->has('Authorization')) {
+             throw new AuthenticationException("getCredentials");
+         }*/
+        // dump($request);die();
         $credentials = [
-            'email' => $request->request->get('email'),
-            'password' => $request->request->get('password'),
+            'email' => $request->request->get('login_form[_username]'),
+            'password' => $request->request->get('_password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
@@ -107,13 +115,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        dd('success!');
+
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
 
-// For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('user_login'));
+        // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
     protected function getLoginUrl()

@@ -11,17 +11,17 @@
                             {{ error.messageKey|trans(error.messageData, 'security') }}
                         </div>
                     {% endif %}
-                    {{ form_start(form) }}
-                    {{ form_row(form._username) }}
-                    {{ form_row(form._password) }}
-                    <button
-                            type="submit" class="btn btn-success" style="margin:15px;">
-                        Login <span class="fa fa-lock"></span>
-                    </button>
-                    <input type="hidden" name="_csrf_token"
-                           value="{{ csrf_token('authenticate') }}"
-                    >
-                    {{ form_end(form) }}
+                    <form action="{{ path('user_login') }}" method="post">
+                        <label for="username">Email:</label>
+                        <input type="text" id="username" name="_username"/>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="_password"/>
+                        <input type="hidden" name="_target_path" value="account"/>
+                        <input type="submit" name="login"/>
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('authenticate') }}"
+                        >
+                    </form>
                     <p><b>Si no está registrado vaya <a href="{{ path('user_registration') }}">AQUÍ</a><b></p>
                     <br>
                     <p>CREDENCIALES DE ADMINISTRADOR:</p>

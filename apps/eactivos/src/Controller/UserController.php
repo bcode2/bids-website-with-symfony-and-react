@@ -51,9 +51,11 @@ class UserController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         // dump($authenticationUtils);
         dump($request->isMethod('POST'));
-
+        dump($request->request->get('_csrf_token'));
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        dump($request->query->get('login_form[_username]'));
+
         dump($lastUsername);
         $form = $this->createForm(
             LoginForm::class,
@@ -71,40 +73,6 @@ class UserController extends AbstractController
             ]
         );
     }
-
-
-    /* /**
-      * @Route("login", name="user_login")
-      *
-      * @param Request $request
-      *
-      * @param AuthenticationUtils $authenticationUtils
-      *
-      * @return RedirectResponse|Response
-      *//*
-    public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
-    {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('asset_list');
-        }
-
-        $form = $this->createForm(
-            LoginForm::class,
-            [
-                'last_username' => $authenticationUtils->getLastUsername(),
-            ]
-        );
-
-        dump( $authenticationUtils->getLastAuthenticationError());
-
-        return $this->render(
-            'user/login.html.twig',
-            [
-                'form' => $form->createView(),
-                'error' => $authenticationUtils->getLastAuthenticationError(),
-            ]
-        );
-    }*/
 
     /**
      * @Route("logout", name="user_logout",methods={"GET"})
