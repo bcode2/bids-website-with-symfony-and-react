@@ -1,20 +1,20 @@
 {
-    "_readme": [
-        "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
-        "This file is @generated automatically"
-    ],
-    "content-hash": "429963cbb6da84bb23ddf62f825e030b",
-    "packages": [
-        {
-            "name": "composer/package-versions-deprecated",
-            "version": "1.11.99",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/composer/package-versions-deprecated.git",
-                "reference": "c8c9aa8a14cc3d3bec86d0a8c3fa52ea79936855"
-            },
-            "dist": {
+  "_readme": [
+    "This file locks the dependencies of your project to a known state",
+    "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+    "This file is @generated automatically"
+  ],
+  "content-hash": "c73c95f2dbb62d4a79bdfbb2138a835a",
+  "packages": [
+    {
+      "name": "composer/package-versions-deprecated",
+      "version": "1.11.99",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/composer/package-versions-deprecated.git",
+        "reference": "c8c9aa8a14cc3d3bec86d0a8c3fa52ea79936855"
+      },
+      "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/composer/package-versions-deprecated/zipball/c8c9aa8a14cc3d3bec86d0a8c3fa52ea79936855",
                 "reference": "c8c9aa8a14cc3d3bec86d0a8c3fa52ea79936855",
@@ -2060,24 +2060,46 @@
                     "email": "fabien@symfony.com"
                 }
             ],
-            "description": "This bundle provides a way to configure your controllers with annotations",
-            "keywords": [
-                "annotations",
-                "controllers"
-            ],
-            "time": "2020-08-25T19:10:18+00:00"
+          "description": "This bundle provides a way to configure your controllers with annotations",
+          "keywords": [
+            "annotations",
+            "controllers"
+          ],
+          "time": "2020-08-25T19:10:18+00:00"
         },
-        {
-            "name": "symfony/asset",
-            "version": "v4.4.15",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/asset.git",
-                "reference": "9b446eb7c16347088663dc18d38fb0f3b536b7e2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/asset/zipball/9b446eb7c16347088663dc18d38fb0f3b536b7e2",
+    {
+      "name": "symfony/apache-pack",
+      "version": "v1.0.1",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/symfony/apache-pack.git",
+        "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/symfony/apache-pack/zipball/3aa5818d73ad2551281fc58a75afd9ca82622e6c",
+        "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c",
+        "shasum": ""
+      },
+      "type": "symfony-pack",
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "description": "A pack for Apache support in Symfony",
+      "time": "2017-12-12T01:46:35+00:00"
+    },
+    {
+      "name": "symfony/asset",
+      "version": "v4.4.15",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/symfony/asset.git",
+        "reference": "9b446eb7c16347088663dc18d38fb0f3b536b7e2"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/symfony/asset/zipball/9b446eb7c16347088663dc18d38fb0f3b536b7e2",
                 "reference": "9b446eb7c16347088663dc18d38fb0f3b536b7e2",
                 "shasum": ""
             },
@@ -6306,34 +6328,6 @@
             "time": "2020-10-01T13:17:48+00:00"
         },
         {
-            "name": "symfony/twig-pack",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/twig-pack.git",
-                "reference": "8b278ea4b61fba7c051f172aacae6d87ef4be0e0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-pack/zipball/8b278ea4b61fba7c051f172aacae6d87ef4be0e0",
-                "reference": "8b278ea4b61fba7c051f172aacae6d87ef4be0e0",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0",
-                "symfony/twig-bundle": "*",
-                "twig/extra-bundle": "^2.12|^3.0",
-                "twig/twig": "^2.12|^3.0"
-            },
-            "type": "symfony-pack",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A Twig pack for Symfony projects",
-            "time": "2019-10-17T05:44:22+00:00"
-        },
-        {
             "name": "symfony/validator",
             "version": "v4.4.15",
             "source": {
@@ -7085,17 +7079,226 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "nikic/php-parser",
-            "version": "v4.10.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "658f1be311a230e0907f5dfe0213742aff0596de"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/658f1be311a230e0907f5dfe0213742aff0596de",
+      {
+        "name": "doctrine/data-fixtures",
+        "version": "1.4.4",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/doctrine/data-fixtures.git",
+          "reference": "16a03fadb5473f49aad70384002dfd5012fe680e"
+        },
+        "dist": {
+          "type": "zip",
+          "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/16a03fadb5473f49aad70384002dfd5012fe680e",
+          "reference": "16a03fadb5473f49aad70384002dfd5012fe680e",
+          "shasum": ""
+        },
+        "require": {
+          "doctrine/common": "^2.13|^3.0",
+          "doctrine/persistence": "^1.3.3|^2.0",
+          "php": "^7.2 || ^8.0"
+        },
+        "conflict": {
+          "doctrine/phpcr-odm": "<1.3.0"
+        },
+        "require-dev": {
+          "doctrine/coding-standard": "^6.0",
+          "doctrine/dbal": "^2.5.4",
+          "doctrine/mongodb-odm": "^1.3.0 || ^2.0.0",
+          "doctrine/orm": "^2.7.0",
+          "phpunit/phpunit": "^7.0"
+        },
+        "suggest": {
+          "alcaeus/mongo-php-adapter": "For using MongoDB ODM 1.3 with PHP 7 (deprecated)",
+          "doctrine/mongodb-odm": "For loading MongoDB ODM fixtures",
+          "doctrine/orm": "For loading ORM fixtures",
+          "doctrine/phpcr-odm": "For loading PHPCR ODM fixtures"
+        },
+        "type": "library",
+        "extra": {
+          "branch-alias": {
+            "dev-master": "1.4.x-dev"
+          }
+        },
+        "autoload": {
+          "psr-4": {
+            "Doctrine\\Common\\DataFixtures\\": "lib/Doctrine/Common/DataFixtures"
+          }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+          "MIT"
+        ],
+        "authors": [
+          {
+            "name": "Jonathan Wage",
+            "email": "jonwage@gmail.com"
+          }
+        ],
+        "description": "Data Fixtures for all Doctrine Object Managers",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+          "database"
+        ],
+        "funding": [
+          {
+            "url": "https://www.doctrine-project.org/sponsorship.html",
+            "type": "custom"
+          },
+          {
+            "url": "https://www.patreon.com/phpdoctrine",
+            "type": "patreon"
+          },
+          {
+            "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fdata-fixtures",
+            "type": "tidelift"
+          }
+        ],
+        "time": "2020-09-01T07:13:28+00:00"
+      },
+      {
+        "name": "doctrine/doctrine-fixtures-bundle",
+        "version": "3.3.2",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
+          "reference": "a2179f447425d9e784fb9bc224e533a0ab083b98"
+        },
+        "dist": {
+          "type": "zip",
+          "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/a2179f447425d9e784fb9bc224e533a0ab083b98",
+          "reference": "a2179f447425d9e784fb9bc224e533a0ab083b98",
+          "shasum": ""
+        },
+        "require": {
+          "doctrine/data-fixtures": "^1.3",
+          "doctrine/doctrine-bundle": "^1.11|^2.0",
+          "doctrine/orm": "^2.6.0",
+          "doctrine/persistence": "^1.3|^2.0",
+          "php": "^7.1 || ^8.0",
+          "symfony/config": "^3.4|^4.3|^5.0",
+          "symfony/console": "^3.4|^4.3|^5.0",
+          "symfony/dependency-injection": "^3.4|^4.3|^5.0",
+          "symfony/doctrine-bridge": "^3.4|^4.1|^5.0",
+          "symfony/http-kernel": "^3.4|^4.3|^5.0"
+        },
+        "require-dev": {
+          "doctrine/coding-standard": "^6.0",
+          "phpunit/phpunit": "^7.4 || ^9.2",
+          "symfony/phpunit-bridge": "^4.1|^5.0"
+        },
+        "type": "symfony-bundle",
+        "extra": {
+          "branch-alias": {
+            "dev-master": "3.3.x-dev"
+          }
+        },
+        "autoload": {
+          "psr-4": {
+            "Doctrine\\Bundle\\FixturesBundle\\": ""
+          }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+          "MIT"
+        ],
+        "authors": [
+          {
+            "name": "Fabien Potencier",
+            "email": "fabien@symfony.com"
+          },
+          {
+            "name": "Doctrine Project",
+            "homepage": "http://www.doctrine-project.org"
+          },
+          {
+            "name": "Symfony Community",
+            "homepage": "http://symfony.com/contributors"
+          }
+        ],
+        "description": "Symfony DoctrineFixturesBundle",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+          "Fixture",
+          "persistence"
+        ],
+        "funding": [
+          {
+            "url": "https://www.doctrine-project.org/sponsorship.html",
+            "type": "custom"
+          },
+          {
+            "url": "https://www.patreon.com/phpdoctrine",
+            "type": "patreon"
+          },
+          {
+            "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fdoctrine-fixtures-bundle",
+            "type": "tidelift"
+          }
+        ],
+        "time": "2020-09-01T07:06:14+00:00"
+      },
+      {
+        "name": "fzaninotto/faker",
+        "version": "v1.9.1",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/fzaninotto/Faker.git",
+          "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f"
+        },
+        "dist": {
+          "type": "zip",
+          "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/fc10d778e4b84d5bd315dad194661e091d307c6f",
+          "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f",
+          "shasum": ""
+        },
+        "require": {
+          "php": "^5.3.3 || ^7.0"
+        },
+        "require-dev": {
+          "ext-intl": "*",
+          "phpunit/phpunit": "^4.8.35 || ^5.7",
+          "squizlabs/php_codesniffer": "^2.9.2"
+        },
+        "type": "library",
+        "extra": {
+          "branch-alias": {
+            "dev-master": "1.9-dev"
+          }
+        },
+        "autoload": {
+          "psr-4": {
+            "Faker\\": "src/Faker/"
+          }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+          "MIT"
+        ],
+        "authors": [
+          {
+            "name": "François Zaninotto"
+          }
+        ],
+        "description": "Faker is a PHP library that generates fake data for you.",
+        "keywords": [
+          "data",
+          "faker",
+          "fixtures"
+        ],
+        "time": "2019-12-12T13:22:17+00:00"
+      },
+      {
+        "name": "nikic/php-parser",
+        "version": "v4.10.2",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/nikic/PHP-Parser.git",
+          "reference": "658f1be311a230e0907f5dfe0213742aff0596de"
+        },
+        "dist": {
+          "type": "zip",
+          "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/658f1be311a230e0907f5dfe0213742aff0596de",
                 "reference": "658f1be311a230e0907f5dfe0213742aff0596de",
                 "shasum": ""
             },
@@ -7588,26 +7791,54 @@
                 },
                 {
                     "url": "https://github.com/fabpot",
-                    "type": "github"
+                  "type": "github"
                 },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
+              {
+                "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                "type": "tidelift"
+              }
             ],
-            "time": "2020-10-02T12:57:56+00:00"
+          "time": "2020-10-02T12:57:56+00:00"
         },
-        {
-            "name": "symfony/web-profiler-bundle",
-            "version": "v4.4.15",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/web-profiler-bundle.git",
-                "reference": "f3b967b34b1db5d3285c415fbe5ce2b9299e6cd6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/f3b967b34b1db5d3285c415fbe5ce2b9299e6cd6",
+      {
+        "name": "symfony/twig-pack",
+        "version": "v1.0.0",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/symfony/twig-pack.git",
+          "reference": "8b278ea4b61fba7c051f172aacae6d87ef4be0e0"
+        },
+        "dist": {
+          "type": "zip",
+          "url": "https://api.github.com/repos/symfony/twig-pack/zipball/8b278ea4b61fba7c051f172aacae6d87ef4be0e0",
+          "reference": "8b278ea4b61fba7c051f172aacae6d87ef4be0e0",
+          "shasum": ""
+        },
+        "require": {
+          "php": "^7.0",
+          "symfony/twig-bundle": "*",
+          "twig/extra-bundle": "^2.12|^3.0",
+          "twig/twig": "^2.12|^3.0"
+        },
+        "type": "symfony-pack",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+          "MIT"
+        ],
+        "description": "A Twig pack for Symfony projects",
+        "time": "2019-10-17T05:44:22+00:00"
+      },
+      {
+        "name": "symfony/web-profiler-bundle",
+        "version": "v4.4.15",
+        "source": {
+          "type": "git",
+          "url": "https://github.com/symfony/web-profiler-bundle.git",
+          "reference": "f3b967b34b1db5d3285c415fbe5ce2b9299e6cd6"
+        },
+        "dist": {
+          "type": "zip",
+          "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/f3b967b34b1db5d3285c415fbe5ce2b9299e6cd6",
                 "reference": "f3b967b34b1db5d3285c415fbe5ce2b9299e6cd6",
                 "shasum": ""
             },

@@ -2,31 +2,26 @@
 
 {% block body %}
     <div style="width:80%;margin: 40px auto 40px auto;text-align:center;background: white;">
-
-        <h1>LISTADO DE SUBASTAS</h1>
-
-        <table class="table table-hover">
+        <h1>LISTADO DE SUBASTAS <a href="{{ path('asset_new') }}">
+                <button type="button" class="btn btn-primary btn-lg">Agregar subasta</button>
+            </a></h1>
+        <table class="table table-hover text-center">
             <thead>
             <tr>
-                <th>Id</th>
-                <th>Imagen</th>
-                <th>Nombre</th>
-                <th>Precio</th>
-                <th>Categoría</th>
-                <th>Acciones</th>
+                <th class="text-center">Id</th>
+                <th class="text-center">Empresa</th>
+                <th class="text-center">Precio Inicial de Venta</th>
+                <th class="text-center">Acciones</th>
             </tr>
             </thead>
             <tbody>
-
             {% for asset in assets %}
                 <tr>
                     <td><a href="{{ path('asset_show', { 'id': asset.id }) }}">{{ asset.id }}</a></td>
-                    <td><img style="width:30px;" src="{{ asset(asset.img,'img') }}"></td>
                     <td>{{ asset.name }}</td>
                     <td>{{ asset.price }}</td>
-                    <td>{{ asset.category }}</td>
                     <td>
-                        <ul>
+                        <ul class="text-center">
                             <li style="display:inline;">
                                 <a href="{{ path('asset_show', { 'id': asset.id }) }}"><img alt="show"
                                                                                             style="width:20px;"
@@ -48,12 +43,5 @@
             {% endfor %}
             </tbody>
         </table>
-        <ul>
-            <li>
-                <a href="{{ path('asset_new') }}">
-                    <button type="button" class="btn btn-primary btn-lg">Agregar subasta</button>
-                </a>
-            </li>
-        </ul>
     </div>
 {% endblock %}

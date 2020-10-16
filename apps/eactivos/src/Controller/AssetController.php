@@ -4,36 +4,34 @@ namespace App\Controller;
 
 use App\Entity\Asset;
 use App\Form\AssetType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 /**
  * Asset controller.
- * @Security("is_granted('ROLE_ADMIN')")
- * @Route("admin/asset")
+ * @Route("asset")
  */
 class AssetController extends AbstractController
 {
     /**
      * Lists all Asset entities.
      *
-     * @Route("/", name="asset_list")
-     * @Method("GET")
+     * @Route("/list", name="asset_list",methods={"GET"})
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
         $em = $this->getDoctrine()->getManager();
-
-        $Assets = $em->getRepository('AppBundle:Asset')->findAll();
+        $assets = $em->getRepository('App:Asset')->findAll();
 
         return $this->render(
             'asset/list.html.twig',
             [
-                'assets' => $Assets,
+                'assets' => $assets,
             ]
         );
     }
@@ -42,12 +40,14 @@ class AssetController extends AbstractController
      * Creates a new Asset entity.
      *
      * @Route("/new", name="asset_new")
-     * @Method({"GET", "POST"})
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
      */
     public function newAction(Request $request)
     {
         $asset = new Asset();
-        $form = $this->createForm('AppBundle\Form\AssetType', $asset);
+        $form = $this->createForm(AssetType::class, $asset);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -71,9 +71,11 @@ class AssetController extends AbstractController
      * Finds and displays an Asset entity.
      *
      * @Route("/{id}", name="asset_show")
-     * @Method("GET")
+     * @param Asset $asset
+     *
+     * @return Response
      */
-    public function showAction(Asset $asset)
+    public function showAction(Asset $asset): Response
     {
         $deleteForm = $this->createDeleteForm($asset);
 
@@ -90,7 +92,10 @@ class AssetController extends AbstractController
      * Displays a form to edit an existing Asset entity.
      *
      * @Route("/{id}/edit", name="asset_edit")
-     * @Method({"GET", "POST"})
+     * @param Request $request
+     * @param Asset $asset
+     *
+     * @return RedirectResponse|Response
      */
     public function editAction(Request $request, Asset $asset)
     {
@@ -118,7 +123,10 @@ class AssetController extends AbstractController
      * Deletes a Asset entity.
      *
      * @Route("/{id}/delete", name="asset_delete")
-     * @Method("DELETE,POST,GET")
+     * @param Request $request
+     * @param Asset $asset
+     *
+     * @return RedirectResponse
      */
     public function deleteAction(Request $request, Asset $asset)
     {
@@ -133,9 +141,9 @@ class AssetController extends AbstractController
 
             return $this->redirectToRoute('asset_list');
         } catch (\Exception $e) {
-            $logger = $this->get('logger');
-            $error = "Ha intentado  eliminar una subasta";
-            $logger->error($error);
+            /* $logger = $this->get('logger');
+             $error = "Ha intentado  eliminar una subasta";
+             $logger->error($error);*/
 
             return $this->redirectToRoute('asset_list');
         }
@@ -150,6 +158,6 @@ class AssetController extends AbstractController
      */
     private function createDeleteForm(Asset $asset): FormInterface
     {
-        return $this->createFormBuilder()->setAction($this->generateUrl('Asset_delete', ['id' => $asset->getId()]))->setMethod('DELETE')->getForm();
+        return $this->createFormBuilder()->setAction($this->generateUrl('asset_delete', ['id' => $asset->getId()]))->setMethod('DELETE')->getForm();
     }
 }

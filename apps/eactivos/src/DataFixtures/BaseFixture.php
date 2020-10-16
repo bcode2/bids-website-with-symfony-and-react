@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Faker\Generator;
 
 abstract class BaseFixture extends Fixture
 {
@@ -20,7 +21,6 @@ abstract class BaseFixture extends Fixture
     {
         $this->manager = $manager;
         $this->faker = Factory::create();
-        // $this->faker->addProvider(new Faker\Provider\en_US\Company($faker));
         $this->loadData($manager);
     }
 
@@ -30,7 +30,6 @@ abstract class BaseFixture extends Fixture
             $entity = new $className();
             $factory($entity, $i);
             $this->manager->persist($entity);
-            // store for usage later as App\Entity\ClassName_#COUNT#
             $this->addReference($className.'_'.$i, $entity);
         }
     }

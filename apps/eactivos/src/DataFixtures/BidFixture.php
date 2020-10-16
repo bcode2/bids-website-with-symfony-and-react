@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Asset;
 use App\Entity\Bid;
+use App\Entity\User;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
@@ -15,18 +16,19 @@ class BidFixture extends BaseFixture implements DependentFixtureInterface
     {
         $this->createMany(
             Bid::class,
-            14,
+            60,
             function (Bid $bid, $count) {
-                $bid->setUser();
-                $bid->setPrice($this->faker->randomFloat($nbMaxDecimals = 2, $min = 5, $max = 100));
+                $bid->setUser($this->getRandomReference(User::class));
+                $bid->setBidAmount($this->faker->randomFloat($nbMaxDecimals = 2, $min = 5, $max = 100));
                 $bid->setAsset($this->getRandomReference(Asset::class));
+                $bid->setEffectDate();
             }
         );
         $manager->flush();
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
-        return [AssetFixture::class];
+        return [AssetFixture::class, UserFixture::class];
     }
 }

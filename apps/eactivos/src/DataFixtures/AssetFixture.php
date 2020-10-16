@@ -3,33 +3,24 @@
 namespace App\DataFixtures;
 
 use App\Entity\Asset;
-use App\Entity\Category;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 
-class AssetFixture extends BaseFixture implements DependentFixtureInterface
+class AssetFixture extends BaseFixture
 {
-    private static $imagePrefix = 1;
 
     public function loadData(ObjectManager $manager)
     {
         $this->createMany(
             Asset::class,
-            14,
+            30,
             function (Asset $asset, $count) {
-
-                $asset->setName("Asset blabla".$this->faker->domainWord);
+                $asset->setName($this->faker->company);
                 $asset->setPrice($this->faker->randomFloat($nbMaxDecimals = 2, $min = 5, $max = 100));
-                $asset->setImg("gafa".self::$imagePrefix++.".jpg");
-                $asset->setCategory($this->getRandomReference(Category::class));
+                $asset->setDescription($this->faker->text($maxNbChars = 160));
+                $asset->setEndDate($this->faker->dateTimeBetween('+1 week', '+2 month'));
             }
         );
         $manager->flush();
-    }
-
-    public function getDependencies()
-    {
-        return [CategoryFixture::class];
     }
 }

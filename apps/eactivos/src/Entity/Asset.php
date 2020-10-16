@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,7 +31,6 @@ class Asset
      */
     public $name;
 
-
     /**
      * @ORM\Column(name="price",type="decimal", scale=2)
      */
@@ -49,51 +50,32 @@ class Asset
     private $endDate;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="img", type="string", length=100,options={"default" :"assetDefault.jpg"})
-     */
-    private $img;
-
-    /**
-     * *  One Asset  will have one  category
-     * @ORM\ManyToOne(targetEntity="Category",inversedBy="assets")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
-     * @return integer
-     */
-    private $category;
-
-    /**
-     *
-     * @ORM\OneToMany(targetEntity="Bid", mappedBy="asset")
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Bid" ,mappedBy="asset")
      */
     private $bids;
 
-    /**
-     * Get assets
-     *
-     * @return Collection
-     */
-    public function getassets()
+    public function __construct()
     {
-        return $this->assets;
+        $this->bids = new ArrayCollection();
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getImg(): string
+    public function getBids()
     {
-        return $this->img;
+        return $this->bids;
     }
 
     /**
-     * @param string $img
+     * @param mixed $bids
      */
-    public function setImg(string $img)
+    public function setBids($bids)
     {
-        $this->img = $img;
+        $this->bids = $bids;
     }
+
 
     /**
      * @return string
@@ -128,18 +110,11 @@ class Asset
     }
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Get id.
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -151,7 +126,7 @@ class Asset
      *
      * @return Asset
      */
-    public function setName($name)
+    public function setName(string $name): Asset
     {
         $this->name = $name;
 
@@ -175,7 +150,7 @@ class Asset
      *
      * @return Asset
      */
-    public function setPrice($price): Asset
+    public function setPrice(string $price): Asset
     {
         $this->price = $price;
 
@@ -190,29 +165,5 @@ class Asset
     public function getPrice(): string
     {
         return $this->price;
-    }
-
-    /**
-     * Set category.
-     *
-     * @param \App\Entity\Category|null $category
-     *
-     * @return Asset
-     */
-    public function setCategory(Category $category): Asset
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category.
-     *
-     * @return \AppBundle\Entity\Category|null
-     */
-    public function getCategory()
-    {
-        return $this->category;
     }
 }

@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * User
  * @ORM\Entity
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User
 {
@@ -42,7 +44,6 @@ class User
      */
     private $email;
 
-
     /**
      * @var string
      *
@@ -50,24 +51,46 @@ class User
      */
     private $password;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default" : 0})
+     */
+    private $admin;
 
     /**
-     * @Assert\NotBlank
-     * @Assert\Length(max=4096)
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Bid" ,mappedBy="user")
      */
-    private $plainPassword;
+    private $bids;
+
+    public function __construct()
+    {
+        $this->bids = new ArrayCollection();
+    }
 
     /**
-     * @ORM\Column(type="json")
+     * @return bool
      */
-    private $roles = [];
+    public function isAdmin(): bool
+    {
+        return $this->admin;
+    }
+
+    /**
+     * @param bool $isAdmin
+     */
+    public function setIsAdmin(bool $isAdmin)
+    {
+        $this->admin = $isAdmin;
+    }
 
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -79,7 +102,7 @@ class User
      *
      * @return User
      */
-    public function setName($name)
+    public function setName(string $name): User
     {
         $this->name = $name;
 
@@ -91,7 +114,7 @@ class User
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -103,7 +126,7 @@ class User
      *
      * @return User
      */
-    public function setSurname($surname)
+    public function setSurname(string $surname): User
     {
         $this->surname = $surname;
 
@@ -115,14 +138,9 @@ class User
      *
      * @return string
      */
-    public function getSurname()
+    public function getSurname(): string
     {
         return $this->surname;
-    }
-
-    public function getUsername()
-    {
-        return $this->email;
     }
 
     /**
@@ -132,7 +150,7 @@ class User
      *
      * @return User
      */
-    public function setEmail($email)
+    public function setEmail(string $email): User
     {
         $this->email = $email;
 
@@ -144,26 +162,9 @@ class User
      *
      * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
-    }
-
-
-    /**
-     * @var integer
-     */
-    private $iduser;
-
-
-    /**
-     * Get iduser
-     *
-     * @return integer
-     */
-    public function getIduser()
-    {
-        return $this->iduser;
     }
 
     /**
@@ -173,7 +174,7 @@ class User
      *
      * @return User
      */
-    public function setPassword($password)
+    public function setPassword(string $password): User
     {
         $this->password = $password;
 
@@ -185,7 +186,7 @@ class User
      *
      * @return string
      */
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
