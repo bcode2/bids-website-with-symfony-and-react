@@ -41,6 +41,11 @@ class User implements UserInterface
     private $surname;
 
     /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
      * @var string
      * @ORM\Column(name="email", type="string", length=100, unique=true, nullable=false)
      */
@@ -49,7 +54,7 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string",nullable=false,  length=180)
+     * @ORM\Column(name="password", type="string",nullable=false,  length=255)
      */
     private $password;
 
@@ -215,9 +220,23 @@ class User implements UserInterface
         return $this->password;
     }
 
-    public function getRoles()
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        // TODO: Implement getRoles() method.
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 
     public function getSalt()
@@ -225,9 +244,14 @@ class User implements UserInterface
         // TODO: Implement getSalt() method.
     }
 
-    public function getUsername()
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
     {
-        // TODO: Implement getUsername() method.
+        return (string)$this->email;
     }
 
     public function eraseCredentials()

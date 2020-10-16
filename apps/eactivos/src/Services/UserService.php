@@ -2,16 +2,16 @@
 
 namespace App\Services;
 
-use App\Entity\Asset;
-use App\Repository\AssetRepository;
+use App\Entity\User;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
 
-class AssetService extends AbstractEntityService
+class UserService extends AbstractEntityService
 
 {
-    private $repository;
     protected $em;
+    private $repository;
 
     /**
      * @param EntityManagerInterface $entityManager
@@ -30,35 +30,29 @@ class AssetService extends AbstractEntityService
     /**
      * @param $id
      *
-     * @return Asset|object|null
+     * @return User|object|null
      */
-    public function findOneById(int $id): Asset
+    public function findOneById(int $id): User
     {
         dump($this->getRepository()->find($id));
 
         return $this->getRepository()->find($id);
     }
 
-
-    public function create(Asset $asset): int
+    /**
+     * @return UserRepository|ObjectRepository
+     */
+    public function getRepository(): ObjectRepository
     {
-        $this->getEntityManager()->persist($asset);
-        $this->getEntityManager()->flush();
-
-        return $asset->getId();
+        return $this->getEntityManager()->getRepository(User::class);
     }
 
-    /**
-     * @param Asset $entity
-     *
-     * @return Asset
-     */
-    public function delete(Asset $entity): Asset
+    public function create(User $user): int
     {
-        $this->getEntityManager()->remove($entity);
+        $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
 
-        return $entity;
+        return $user->getId();
     }
 
     public function getById(int $id)
@@ -72,10 +66,12 @@ class AssetService extends AbstractEntityService
     }
 
     /**
-     * @return AssetRepository|ObjectRepository
+     * @param string $email
+     *
+     * @return User|object|null
      */
-    public function getRepository(): ObjectRepository
+    public function findOneByEmail(string $email)
     {
-        return $this->getEntityManager()->getRepository(Asset::class);
+        return $this->getRepository()->findOneBy(['email' => $email,]);
     }
 }

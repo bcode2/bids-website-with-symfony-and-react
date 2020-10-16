@@ -5,7 +5,6 @@ security:
     encoders:
         App\Entity\User:
             algorithm: bcrypt
-            cost: 10
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
@@ -27,13 +26,13 @@ security:
             anonymous: ~
             provider: our_db_provider
             form_login:
-                login_path: user/login
+                login_path: user_login
                 check_path: user/login
             guard:
                 authenticators:
                     - app.security.login_form_authenticator
             logout:
-                path: user/logout
+                path: user_logout
                 target: /
                 invalidate_session: true
 
@@ -48,3 +47,5 @@ security:
             #form_login: ~
     access_control:
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+

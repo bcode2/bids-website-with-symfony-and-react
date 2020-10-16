@@ -44,20 +44,18 @@ class AssetController extends AbstractController
      * @Route("/new", name="asset_new")
      * @param Request $request
      *
+     * @param AssetService $assetService
+     *
      * @return RedirectResponse|Response
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, AssetService $assetService)
     {
         $asset = new Asset();
-
         $form = $this->createAssetForm($asset);
-        // $form = $this->createForm(AssetType::class, $asset);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($asset);
-            $em->flush();
+            $assetService->create($asset);
 
             return $this->redirectToRoute('asset_show', ['id' => $asset->getId()]);
         }
@@ -172,7 +170,7 @@ class AssetController extends AbstractController
      */
     private function createAssetForm(Asset $asset): FormInterface
     {
-        $form = $this->createForm(
+        return $this->createForm(
             AssetType::class,
             $asset,
             [
@@ -180,7 +178,5 @@ class AssetController extends AbstractController
                 'method' => 'POST',
             ]
         );
-
-        return $form;
     }
 }
