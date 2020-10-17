@@ -67,6 +67,9 @@ class BidController extends AbstractController
             return $this->redirectToRoute('asset_show', ['id' => $asset->getId()]);
         }*/
 
+        dump($request);
+        die();
+
         $this->addFlash('success', 'Su puja se ha registrado en el sistema');
 
         return $this->redirectToRoute('asset_list');

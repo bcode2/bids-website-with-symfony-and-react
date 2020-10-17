@@ -47,7 +47,12 @@
                 {% set currentUserlastBid=0 %}
                 {% set initialDateForComparing = date('200-03-15 14:18:00.000000') %}
                 <tr>
-                    <td><a href="{{ path('asset_show', { 'id': asset.id }) }}">{{ asset.id }}</a></td>
+                    <td class="align-middle">
+                        <div style="border: 1px solid gray; min-width: 50px ;border-radius: 50%;background-color: cornflowerblue ;color: white;font-weight: bold">
+                            <a
+                                    style="color: white" href="{{ path('asset_show', { 'id': asset.id }) }}"
+                                    style="font-weight: bold">{{ asset.id }}</a></div>
+                    </td>
                     <td><strong>{{ asset.name |upper }}</strong></td>
                     <td>{{ asset.price|format_currency('EUR', locale='de') }}</td>
                     <td style="text-align: left">
@@ -73,7 +78,7 @@
                                 {% endif %}
                             {% endfor %}
                             {% if countMyBids == 0 %}
-                                <strong style="color:green"> Aún no he pujado</strong>
+                                <strong style="color:green"> Aún no has pujado</strong>
                             {% else %}
                                 <li style="display:inline;">
                                     <a href="{{ path('bid_delete', { 'id': currentUserlastBid.id }) }}"><img
@@ -87,14 +92,9 @@
                     {% endif %}
                     <td>
                         <ul class="text-left" style="display:inline;">
-                            <li style="display:inline;">
-                                <a href="{{ path('asset_show', { 'id': asset.id }) }}"><img alt="show"
-                                                                                            style="width:20px;"
-                                                                                            src="{{ asset('viewicon.svg','img') }}"></a>
-                            </li>
                             <li style="display:inline-block;">
                                 <div>
-                                    <form METHOD="post" action="{{ path('bid_new') }}">
+                                    <form method="post" action="{{ path('bid_new') }}">
                                         <div>
                                             <input size="5" type="number" required style="display:inline-block;">
                                             <button style="display:inline-block;">Pujar</button>
