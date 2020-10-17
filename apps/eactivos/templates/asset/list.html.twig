@@ -14,9 +14,6 @@
                 </div>
             {% endif %}
         </div>
-        {# <a href="{{ path('asset_new') }}">
-                <button type="button" class="btn btn-primary btn-lg">Agregar subasta</button>
-            </a> #}
         <div>
             {% for message in app.flashes('success') %}
                 <div class="alert alert-success  alert-dismissible fade show" role="alert">
@@ -32,18 +29,57 @@
             <tr>
                 <th class="text-center">Id</th>
                 <th class="text-center">Empresa</th>
-                <th class="text-center">Precio Inicial de Venta</th>
-                <th class="text-center">Fecha Vencimiento</th>
-                <th class="text-center">Acciones</th>
+                <th class="text-center">Precio recomendado</th>
+                <th class="text-center">Puja mas alta</th>
+                <th class="text-center">Vence</th>
+                {% if (is_granted('ROLE_USER'))  and (not is_granted('ROLE_ADMIN')) %}
+                    <th class="text-center">Mi última puja/Pujas Totales</th>
+                {% endif %}
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th class="text-center">Acciones</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
             {% for asset in assets %}
+                {% set countMyBids = 0 %}
+                {% set currentUserlastBid=0 %}
+                {% set initialDateForComparing = date('200-03-15 14:18:00.000000') %}
                 <tr>
                     <td><a href="{{ path('asset_show', { 'id': asset.id }) }}">{{ asset.id }}</a></td>
-                    <td>{{ asset.name }}</td>
-                    <td>{{ asset.price }}</td>
-                    <td>{{ asset.endDate |date("m/d/Y") }}</td>
+                    <td><strong>{{ asset.name |upper }}</strong></td>
+                    <td>{{ asset.price|format_currency('EUR', locale='de') }}</td>
+                    <td style="text-align: left">
+                        {% if asset.highestBid == null %}
+                            <strong style="color:green"> Aún no hay pujas</strong>
+                        {% else %}
+                            <strong style="color: #ff0000"> {{ asset.BestBid.bidAmount | format_currency('EUR', locale='de') }}</strong>&nbsp;&nbsp;({{ asset.BestBid.user.name }} {{ asset.BestBid.user.surname }})
+                        {% endif %}
+                    </td>
+                    <td>{{ asset.endDate | date("m/d/Y") }}</td>
+                    {% if (is_granted('ROLE_USER'))  and (not is_granted('ROLE_ADMIN')) %}
+                        <td>
+                            {% set countMyBids = 0 %}
+                            {% set currentUserlastBid=0 %}
+                            {% set initialDateForComparing = date('200-03-15 14:18:00.000000') %}
+                            {% for bid in  asset.bids %}
+                                {% if bid.user.id == app.user.id %}
+                                    {% set countMyBids = countMyBids + 1 %}
+                                    {% if bid.effectDate > initialDateForComparing %}
+                                        {% set  initialDateForComparing = bid.effectDate %}
+                                        {% set currentUserlastBid = bid %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if countMyBids == 0 %}
+                                <strong style="color:green"> Aún no he pujado</strong>
+                            {% else %}
+                                {{ currentUserlastBid.bidAmount | format_currency('EUR', locale='de') }} / {{ countMyBids }}
+                            {% endif %}
+                        </td>
+
+                    {% endif %}
                     <td>
                         <ul class="text-center">
                             <li style="display:inline;">
@@ -51,16 +87,26 @@
                                                                                             style="width:20px;"
                                                                                             src="{{ asset('viewicon.svg','img') }}"></a>
                             </li>
-                            <li style="display:inline;">
-                                <a href="{{ path('asset_edit', { 'id': asset.id }) }}"><img alt="editar"
-                                                                                            style="width:20px;margin:auto 5px auto 5px;"
-                                                                                            src="{{ asset('editicon.svg','img') }}"></a>
-                            </li>
-                            <li style="display:inline;">
-                                <a href="{{ path('asset_delete', { 'id': asset.id }) }}"><img alt="delete"
-                                                                                              style="width:20px;"
-                                                                                              src="{{ asset('deleteicon.svg','img') }}"></a>
-                            </li>
+                            {% if countMyBids > 0 %}
+                                <li style="display:inline;">
+                                    <a href="{{ path('bid_delete', { 'id': currentUserlastBid.id }) }}"><img
+                                                alt="delete"
+                                                style="width:20px;"
+                                                src="{{ asset('deleteicon.svg','img') }}"></a>
+                                </li>
+                            {% endif %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li style="display:inline;">
+                                    <a href="{{ path('asset_edit', { 'id': asset.id }) }}"><img alt="editar"
+                                                                                                style="width:20px;margin:auto 5px auto 5px;"
+                                                                                                src="{{ asset('editicon.svg','img') }}"></a>
+                                </li>
+                                <li style="display:inline;">
+                                    <a href="{{ path('asset_delete', { 'id': asset.id }) }}"><img alt="delete"
+                                                                                                  style="width:20px;"
+                                                                                                  src="{{ asset('deleteicon.svg','img') }}"></a>
+                                </li>
+                            {% endif %}
                         </ul>
                     </td>
                 </tr>

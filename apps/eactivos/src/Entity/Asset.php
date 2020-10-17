@@ -29,7 +29,7 @@ class Asset
      *
      * @ORM\Column(name="name", type="string", length=180)
      */
-    public $name;
+    private $name;
 
     /**
      * @ORM\Column(name="price",type="decimal", scale=2)
@@ -41,7 +41,7 @@ class Asset
      *
      * @ORM\Column(name="description", type="string", length=280)
      */
-    public $description;
+    private $description;
 
     /**
      * @var DateTime
@@ -55,6 +55,50 @@ class Asset
      */
     private $bids;
 
+    private $highestBid = null;
+
+    private $bestBid = null;
+
+    /**
+     * @return null
+     */
+    public function getBestBid()
+    {
+        if ($this->bids->count() === 0) {
+            return null;
+        }
+        $bestBid = null;
+        $bestBidPrice = 0;
+        $bidArray = $this->getBids();
+
+        foreach ($bidArray as $bid) {
+            $tempBidAmount = $bid->getBidAmount();
+            if ($tempBidAmount >= $bestBidPrice) {
+                $bestBid = $bid;
+            }
+        }
+
+        return $bestBid;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHighestBid()
+    {
+        if ($this->bids->count() === 0) {
+            return null;
+        }
+
+        $BidsPrices = [];
+        $bidArray = $this->getBids()->toArray();
+        foreach ($bidArray as $bid) {
+            $BidsPrices[] = $bid->getBidAmount();
+        }
+
+        return max($BidsPrices);
+    }
+
     public function __construct()
     {
         $this->bids = new ArrayCollection();
@@ -66,6 +110,14 @@ class Asset
     public function getBids()
     {
         return $this->bids;
+
+        /*// autoload collection
+        foreach($this->bids as $bid)
+        {
+            $bid->initialize($level);
+        }*/
+
+        return $this->ownedCars;
     }
 
     /**

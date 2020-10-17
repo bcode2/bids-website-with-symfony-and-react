@@ -37,20 +37,22 @@
                     </button>
                 </a>
             </li>
-            <li>
-                <a href="{{ path('asset_edit', { 'id': asset.id }) }}">
-                    <button type="button" class="btn btn-warning btn-lg btn-block" style="margin: 10px 0;">
-                        Editar subasta
+            {% if is_granted('ROLE_ADMIN') %}
+                <li>
+                    <a href="{{ path('asset_edit', { 'id': asset.id }) }}">
+                        <button type="button" class="btn btn-warning btn-lg btn-block" style="margin: 10px 0;">
+                            Editar subasta
+                        </button>
+                    </a>
+                </li>
+                <li>
+                    {{ form_start(delete_form) }}
+                    <button type="submit" value="Delete" class="btn btn-danger btn-lg btn-block" style="margin: 10px 0;">
+                        Borrar subasta
                     </button>
-                </a>
-            </li>
-            <li>
-                {{ form_start(delete_form) }}
-                <button type="submit" value="Delete" class="btn btn-danger btn-lg btn-block" style="margin: 10px 0;">
-                    Borrar subasta
-                </button>
-                {{ form_end(delete_form) }}
-            </li>
+                    {{ form_end(delete_form) }}
+                </li>
+            {% endif %}
         </ul>
     </div>
 {% endblock %}

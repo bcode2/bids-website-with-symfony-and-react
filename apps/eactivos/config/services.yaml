@@ -30,6 +30,7 @@ services:
     eactivos.abstract_services:
         class: App\Services\AbstractEntityService
         abstract: true
+        autowire: true
         arguments: [ '@doctrine.orm.entity_manager' ]
 
     eactivos.asset_services:
@@ -47,7 +48,7 @@ services:
         autoconfigure: false
 
     eactivos.bid_services:
-        class: App\Services\BidServices
+        class: App\Services\BidService
         parent: 'eactivos.abstract_services'
         autowire: false
         public: true

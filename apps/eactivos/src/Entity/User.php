@@ -96,6 +96,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->bids = new ArrayCollection();
+        $this->setRoles(['ROLE_USER']);
     }
 
     /**

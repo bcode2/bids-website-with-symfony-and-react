@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 
 /**
@@ -25,11 +26,29 @@ class AssetController extends AbstractController
      * Lists all Asset entities.
      *
      * @Route("/list", name="asset_list",methods={"GET"})
+     * @param Security $security
+     *
+     * @return Response
      */
-    public function indexAction(): Response
+    public function indexAction(Security $security): Response
     {
         $em = $this->getDoctrine()->getManager();
         $assets = $em->getRepository('App:Asset')->findAll();
+        //dump($assets[0]->getBids()->count());
+        //dump($assets[0]->getBids()[0]->getUser()->getName());
+
+        //$result=[];
+        $costs = [];
+        $bidArray = $assets[0]->getBids()->toArray();
+        // dump($bidArray);
+
+        $user = $security->getUser();
+        dump($user);
+        foreach ($bidArray as $bid) {
+            array_push($costs, $bid->getBidAmount());
+        }
+
+        $result = array_column($assets[0]->getBids()->toArray(), 'bidAmount');
 
         return $this->render(
             'asset/list.html.twig',
