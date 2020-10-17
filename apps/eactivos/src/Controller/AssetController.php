@@ -6,6 +6,7 @@ use App\Entity\Asset;
 use App\Form\AssetType;
 use App\Services\AssetService;
 use AppBundle\Provider\Model\MessageList;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -45,6 +46,7 @@ class AssetController extends AbstractController
      * @param Request $request
      *
      * @param AssetService $assetService
+     * @IsGranted("ROLE_ADMIN")
      *
      * @return RedirectResponse|Response
      */
@@ -96,7 +98,7 @@ class AssetController extends AbstractController
      * @Route("/{id}/edit", name="asset_edit")
      * @param Request $request
      * @param Asset $asset
-     *
+     * @IsGranted("ROLE_ADMIN")
      * @param AssetService $assetService
      *
      * @return RedirectResponse|Response
@@ -130,7 +132,7 @@ class AssetController extends AbstractController
      * @Route("/{id}/delete", name="asset_delete")
      * @param Request $request
      * @param int $id
-     *
+     * @IsGranted("ROLE_ADMIN")
      * @param AssetService $assetService
      *
      * @return RedirectResponse

@@ -12,22 +12,35 @@
                         </div>
                     {% endif %}
                     <form action="{{ path('user_login') }}" method="post">
-                        <label for="username">Email:</label>
-                        <input type="text" id="username" name="_username"/>
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" name="_password"/>
-                        <input type="hidden" name="_target_path" value="account"/>
-                        <input type="submit" name="login"/>
-                        <input type="hidden" name="_csrf_token"
-                               value="{{ csrf_token('authenticate') }}"
-                        >
+                        <ul class="list-group list-unstyled">
+                            <li>
+                                <label for="username">Email:</label>
+                                <input type="text" id="username" name="_username"/>
+                            </li>
+                            <li>
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" name="_password"/>
+                            </li>
+                            <li>
+                                <input type="hidden" name="_target_path" value="account"/>
+                                <button
+                                        type="submit" class="btn btn-success" style="margin:15px;">
+                                    Login <span class="fa fa-lock"></span>
+                                </button>
+                                <input type="hidden" name="_csrf_token"
+                                       value="{{ csrf_token('authenticate') }}">
+                            </li>
+                        </ul>
                     </form>
                     <p><b>Si no está registrado vaya <a href="{{ path('user_registration') }}">AQUÍ</a><b></p>
-                    <br>
-                    <p>CREDENCIALES DE ADMINISTRADOR:</p>
-                    <br>
-                    <p>email:&nbsp;&nbsp;<span style="color:red;">bcode@protonmail.com</span></p>
-                    <p>clave:&nbsp;&nbsp;<span style="color:red;">password</span></p>
+                    <div style="border: 1px solid; padding: 10px; box-shadow: 3px 7px #888888;display: inline-block">
+                        <p>CREDENCIALES DE ADMINISTRADOR:</p>
+                        <p>email:&nbsp;&nbsp;<span style="color:red;">admin@eactivos.com</span></p>
+                        <p>clave:&nbsp;&nbsp;<span style="color:red;">12345</span></p>
+                        <p>CREDENCIALES DE USUARIO:</p>
+                        <p>email:&nbsp;&nbsp;<span style="color:red;">user@eactivos.com</span></p>
+                        <p>clave:&nbsp;&nbsp;<span style="color:red;">12345</span></p>
+                    </div>
                 </div>
             </div>
         </div>

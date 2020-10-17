@@ -56,18 +56,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-
         throw new AuthenticationException ("xxxxxx");
     }
 
     public function getCredentials(Request $request)
     {
-        /* if (!$request->headers->has('Authorization')) {
-             throw new AuthenticationException("getCredentials");
-         }*/
-        // dump($request);die();
+
         $credentials = [
-            'email' => $request->request->get('login_form[_username]'),
+            'email' => $request->request->get('_username'),
             'password' => $request->request->get('_password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
@@ -81,32 +77,33 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
+
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
-        // dump($token);
+
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
-        $user = $this->userService->findOneByEmail('bcode@protonmail.com');
-        //  $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
-        dump($user);
+
+        $user = $this->userService->findOneByEmail($credentials["email"]);
+
         if (!$user) {
-// fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
 
         return $user;
     }
 
-    public function checkCredentials($credentials, UserInterface $user)
+    public function checkCredentials($credentials, UserInterface $user): bool
     {
-
-        dump($credentials);
-
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
+     *
+     * @param $credentials
+     *
+     * @return string|null
      */
     public function getPassword($credentials): ?string
     {
@@ -124,7 +121,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
-    protected function getLoginUrl()
+    protected function getLoginUrl(): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }

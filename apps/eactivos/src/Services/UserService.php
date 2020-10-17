@@ -72,6 +72,6 @@ class UserService extends AbstractEntityService
      */
     public function findOneByEmail(string $email)
     {
-        return $this->getRepository()->findOneBy(['email' => $email,]);
+        return $this->getRepository()->findOneBy(['email' => $email]);
     }
 }

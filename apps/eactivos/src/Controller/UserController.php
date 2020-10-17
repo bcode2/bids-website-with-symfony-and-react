@@ -45,7 +45,7 @@ class UserController extends AbstractController
         }
 
         $user = $userService->findOneByEmail('bcode@protonmail.com');
-        dump($encoder->isPasswordValid($user, '12345'));
+       // dump($encoder->isPasswordValid($user, '12345'));
         //$authenticationUtils = $this->get('security.authentication_utils');
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

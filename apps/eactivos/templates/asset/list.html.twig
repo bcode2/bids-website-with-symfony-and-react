@@ -2,9 +2,21 @@
 
 {% block body %}
     <div style="width:80%;margin: 40px auto 40px auto;text-align:center;background: white;">
-        <h1>LISTADO DE SUBASTAS <a href="{{ path('asset_new') }}">
+        <div>
+            <h1 style="display: inline-block">LISTADO DE SUBASTAS</h1>
+            {% if is_granted('ROLE_ADMIN') %}
+                <div style="display: inline-block">
+                    <div class="box-body text-right">
+                        <a href="{{ path('asset_new') }}">
+                            <button type="button" class="btn btn-primary btn-lg">Agregar subasta</button>
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        {# <a href="{{ path('asset_new') }}">
                 <button type="button" class="btn btn-primary btn-lg">Agregar subasta</button>
-            </a></h1>
+            </a> #}
         <div>
             {% for message in app.flashes('success') %}
                 <div class="alert alert-success  alert-dismissible fade show" role="alert">
