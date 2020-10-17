@@ -34,13 +34,8 @@ class AssetController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $assets = $em->getRepository('App:Asset')->findAll();
-        //dump($assets[0]->getBids()->count());
-        //dump($assets[0]->getBids()[0]->getUser()->getName());
-
-        //$result=[];
         $costs = [];
         $bidArray = $assets[0]->getBids()->toArray();
-        // dump($bidArray);
 
         $user = $security->getUser();
         dump($user);
