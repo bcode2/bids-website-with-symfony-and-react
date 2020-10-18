@@ -96,9 +96,14 @@
                                 <div>
                                     <form method="post" action="{{ path('bid_new') }}">
                                         <div>
-                                            <input size="5" type="number" required style="display:inline-block;">
+                                            <input name="bidAmount" size="5" type="number" required
+                                                   style="display:inline-block;">
                                             <button style="display:inline-block;">Pujar</button>
                                         </div>
+                                        <input type="hidden" name="_csrf_token"
+                                               value="{{ csrf_token('authenticate') }}">
+                                        <input type="hidden" name="asset_id" value="{{ asset.id }}">
+                                        <input type="hidden" name="user_id" value="{{ app.user.id }}">
                                     </form>
                                 </div>
                             </li>

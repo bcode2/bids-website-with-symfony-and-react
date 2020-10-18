@@ -93,6 +93,14 @@ class User implements UserInterface
      */
     private $bids;
 
+    /**
+     * @return Collection
+     */
+    public function getBids(): Collection
+    {
+        return $this->bids;
+    }
+
     public function __construct()
     {
         $this->bids = new ArrayCollection();

@@ -6,12 +6,15 @@ use App\Entity\User;
 use App\Form\LoginForm;
 use App\Form\UserType;
 use App\Services\UserService;
+use AppBundle\MOP\Services\BrandService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
@@ -44,19 +47,9 @@ class UserController extends AbstractController
             return $this->redirectToRoute('asset_list');
         }
 
-        $user = $userService->findOneByEmail('bcode@protonmail.com');
-       // dump($encoder->isPasswordValid($user, '12345'));
-        //$authenticationUtils = $this->get('security.authentication_utils');
-        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        // dump($authenticationUtils);
-        dump($request->isMethod('POST'));
-        dump($request->request->get('_csrf_token'));
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-        dump($request->query->get('login_form[_username]'));
 
-        dump($lastUsername);
         $form = $this->createForm(
             LoginForm::class,
             [
@@ -122,5 +115,18 @@ class UserController extends AbstractController
         $userService->create($user);
 
         return $this->redirectToRoute('asset_list');
+    }
+
+    /**
+     *
+     * @Route("ajax-bids-count", name="user_bids_by_ajax", methods={"POST","GET"})
+     *
+     * @param UserInterface $user
+     *
+     * @return JsonResponse
+     */
+    public function countUserBids(UserInterface $user): JsonResponse
+    {
+        return new JsonResponse($user->getBids()->count());
     }
 }

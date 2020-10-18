@@ -24,7 +24,7 @@ class AssetService extends AbstractEntityService
 
     public function getAll(): array
     {
-        return $this->repository->findAll();
+        return $this->getRepository()->findAll();
     }
 
     /**

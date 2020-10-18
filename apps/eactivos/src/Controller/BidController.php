@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Services\AssetService;
 use App\Services\BidService;
+use App\Services\UserService;
 use AppBundle\Provider\Model\MessageList;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -51,35 +53,25 @@ class BidController extends AbstractController
      *
      * @param BidService $bidService
      *
+     * @param UserService $userService
+     * @param AssetService $assetService
+     *
      * @return RedirectResponse|Response
      * @IsGranted("ROLE_USER")
-     *
      */
-    public function newAction(Request $request, BidService $bidService)
+    public function newAction(Request $request, BidService $bidService, UserService $userService, AssetService $assetService)
     {
-        /*  $bid = new Bid();
-          $form = $this->createAssetForm($asset);
-          $form->handleRequest($request);*/
+        $asset = $assetService->findOneById($request->request->get('asset_id'));
+        $user = $userService->findOneById($request->request->get('user_id'));
+        $bidAmount = $request->request->get('bidAmount');
 
-        /*if ($form->isSubmitted() && $form->isValid()) {
-            $bidService->create($asset);
-
-            return $this->redirectToRoute('asset_show', ['id' => $asset->getId()]);
-        }*/
-
-        dump($request);
-        die();
-
-        $this->addFlash('success', 'Su puja se ha registrado en el sistema');
+        if ($asset && $user && $bidAmount) {
+            $bidService->createNewBid($asset, $user, $bidAmount);
+            $this->addFlash('success', 'Su puja se ha registrado en el sistema');
+        } else {
+            $this->addFlash('success', 'Ha ocurrido un error. Inténtelo nuevamente');
+        }
 
         return $this->redirectToRoute('asset_list');
-
-        /* return $this->render(
-             'asset/new.html.twig',
-             [
-                 'asset' => $asset,
-                 'form' => $form->createView(),
-             ]
-         );*/
     }
 }

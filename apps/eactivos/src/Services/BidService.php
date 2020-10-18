@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Entity\Asset;
 use App\Entity\Bid;
+use App\Entity\User;
 use App\Repository\BidRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
@@ -75,5 +77,20 @@ class BidService extends AbstractEntityService
     public function update(): void
     {
         $this->getEntityManager()->flush();
+    }
+
+    public function createNewBid(Asset $asset, User $user, float $bidAmount)
+    {
+        $bid = new Bid();
+        $bid->setAsset($asset);
+        $bid->setUser($user);
+        $bid->setBidAmount($bidAmount);
+        $this->getEntityManager()->persist($bid);
+        $this->getEntityManager()->flush();
+    }
+
+    public function findByUserId(int $id): int
+    {
+        return $this->repository->findByUserId(['user' => $id]);
     }
 }

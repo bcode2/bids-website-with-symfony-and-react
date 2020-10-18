@@ -46,6 +46,16 @@ class Bid
     private $bidAmount;
 
     /**
+     * Bid constructor.
+     *
+     * @param DateTime $effectDate
+     */
+    public function __construct()
+    {
+        $this->effectDate = new \DateTime();
+    }
+
+    /**
      * @return mixed
      */
     public function getBidAmount()

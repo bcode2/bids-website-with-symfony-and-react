@@ -28,22 +28,13 @@ class AssetController extends AbstractController
      * @Route("/list", name="asset_list",methods={"GET"})
      * @param Security $security
      *
+     * @param AssetService $assetService
+     *
      * @return Response
      */
-    public function indexAction(Security $security): Response
+    public function indexAction(Security $security, AssetService $assetService): Response
     {
-        $em = $this->getDoctrine()->getManager();
-        $assets = $em->getRepository('App:Asset')->findAll();
-        $costs = [];
-        $bidArray = $assets[0]->getBids()->toArray();
-
-        $user = $security->getUser();
-        dump($user);
-        foreach ($bidArray as $bid) {
-            array_push($costs, $bid->getBidAmount());
-        }
-
-        $result = array_column($assets[0]->getBids()->toArray(), 'bidAmount');
+        $assets = $assetService->getAll();
 
         return $this->render(
             'asset/list.html.twig',
@@ -176,7 +167,12 @@ class AssetController extends AbstractController
      */
     private function createDeleteForm(Asset $asset): FormInterface
     {
-        return $this->createFormBuilder()->setAction($this->generateUrl('asset_delete', ['id' => $asset->getId()]))->setMethod('DELETE')->getForm();
+        return $this->createFormBuilder()->setAction(
+            $this->generateUrl(
+                'asset_delete',
+                ['id' => $asset->getId()]
+            )
+        )->setMethod('DELETE')->getForm();
     }
 
     /**

@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Bid;
 use Doctrine\ORM\EntityRepository;
+
 
 /**
  * BidRepository
@@ -12,4 +14,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class BidRepository extends EntityRepository
 {
+    /**
+     * @param string $id
+     *
+     * @return Bid|object|null
+     */
+    public function findByUserId(int $id)
+    {
+        $em = $this->getEntityManager();
+
+        return $em->getRepository(Bid::class)->findBy(['userId' => $id]);
+    }
 }

@@ -6,6 +6,7 @@ use App\Entity\Asset;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,7 +25,7 @@ class AssetType extends AbstractType
             ['label' => 'Nombre de la subasta']
         )->add(
             'price',
-            TextType::class,
+            NumberType::class,
             ['label' => 'Precio']
         )->add(
             'description',
@@ -70,7 +71,7 @@ class AssetType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_product';
+        return 'app_asset';
     }
 
 
