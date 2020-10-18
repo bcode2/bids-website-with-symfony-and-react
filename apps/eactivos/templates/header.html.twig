@@ -1,5 +1,5 @@
-<nav class="navbar navbar-default navbar-fixed-top" style="margin-top: 20px;">
-    <div class="container-fluid">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid" style="margin-top: 20px;">
         <div class="navbar-header">
             <a class="navbar-brand" href="/" style="padding: 0px 15px 0px 15px;">
                 <img class="visible-lg" src="{{ asset('img/logo-expanded.png') }}" alt="Activos Concursales"
@@ -8,11 +8,13 @@
                      alt="Activos Concursales" style="float: left;" border="0">
             </a>
             {% if (is_granted('ROLE_USER'))  or (is_granted('ROLE_ADMIN')) %}
-                <h4 style="display: inline-block">Bienvenido&nbsp;&nbsp;{{ app.user.name }}
+                <h4 style="display: inline-block; ">Bienvenido&nbsp;&nbsp;{{ app.user.name }}
                     &nbsp;&nbsp;{{ app.user.surname }}</h4>
             {% endif %}
             <li class="list-inline-item">
-                <div id="react-user-bids-container"></div>
+                {% if (is_granted('ROLE_BUYER')) %}
+                    <div id="react-user-bids-container" style=" margin-right: 20px; margin-left: 20px"></div>
+                {% endif %}
             </li>
 
             <ul class="nav navbar-nav pull-right list-inline">

@@ -132,7 +132,7 @@ class AssetController extends AbstractController
     }
 
     /**
-     * Deletes a Asset entity.
+     * Deletes an Asset entity.
      *
      * @Route("/{id}/delete", name="asset_delete")
      * @param Request $request

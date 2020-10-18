@@ -33,7 +33,7 @@ security:
                     - app.security.login_form_authenticator
             logout:
                 path: user_logout
-                target: /
+                target: /asset/list
                 invalidate_session: true
 
 
