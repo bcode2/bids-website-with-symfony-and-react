@@ -24,19 +24,19 @@ class UserType extends AbstractType
             TextType::class,
             ['label' => 'Apellidos']
         )->add(
-                'email',
-                EmailType:: class,
-                ['label' => 'Correo Electrónico', 'required' => true,]
-            )->add(
-                'plainPassword',
-                RepeatedType::class,
-                [
-                    'required' => true,
-                    'type' => PasswordType::class,
-                    'first_options' => ['label' => 'Contraseña'],
-                    'second_options' => ['label' => 'Repita Contraseña'],
-                ]
-            );
+            'email',
+            EmailType:: class,
+            ['label' => 'Correo Electrónico', 'required' => true,]
+        )->add(
+            'plainPassword',
+            RepeatedType::class,
+            [
+                'required' => true,
+                'type' => PasswordType::class,
+                'first_options' => ['label' => 'Contraseña'],
+                'second_options' => ['label' => 'Repita Contraseña'],
+            ]
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)

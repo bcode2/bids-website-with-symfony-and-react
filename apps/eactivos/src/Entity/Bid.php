@@ -52,7 +52,7 @@ class Bid
      */
     public function __construct()
     {
-        $this->effectDate = new \DateTime();
+        $this->effectDate = new DateTime();
     }
 
     /**

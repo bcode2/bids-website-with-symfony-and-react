@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Asset;
+use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -43,7 +44,7 @@ class AssetType extends AbstractType
             new CallbackTransformer(
                 function ($value) {
                     if (!$value) {
-                        return new \DateTime('now +1 month');
+                        return new DateTime('now +1 month');
                     }
 
                     return $value;
