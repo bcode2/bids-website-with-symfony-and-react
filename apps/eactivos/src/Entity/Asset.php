@@ -123,7 +123,6 @@ class Asset
         $this->bids = $bids;
     }
 
-
     /**
      * @return string
      */

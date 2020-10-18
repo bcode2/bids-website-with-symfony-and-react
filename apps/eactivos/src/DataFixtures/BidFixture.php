@@ -8,10 +8,8 @@ use App\Entity\User;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-
 class BidFixture extends BaseFixture implements DependentFixtureInterface
 {
-
     public function loadData(ObjectManager $manager)
     {
         $this->createMany(

@@ -34,7 +34,6 @@ abstract class BaseFixture extends Fixture
         }
     }
 
-    // taken from https://stackoverflow.com/questions/54967569/how-to-insert-dummy-data-via-fixtures-to-foreign-column-symfony
     protected function getRandomReference(string $className)
     {
         if (!isset($this->referencesIndex[$className])) {

@@ -5,7 +5,6 @@ namespace App\DataFixtures;
 use App\Entity\Asset;
 use Doctrine\Persistence\ObjectManager;
 
-
 class AssetFixture extends BaseFixture
 {
 
