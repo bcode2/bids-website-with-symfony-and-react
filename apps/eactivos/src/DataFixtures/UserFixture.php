@@ -35,7 +35,7 @@ class UserFixture extends BaseFixture
         $user->setEmail("user@eactivos.com");
         $user->setPassword('12345');
         $user->setIsAdmin(true);
-        $user->setRoles(['ROLE_USER']);
+        $user->setRoles(['ROLE_USER', 'ROLE_BUYER']);
         $password = $this->encoder->encodePassword($user, '12345');
         $user->setPassword($password);
         $manager->persist($user);
@@ -48,7 +48,7 @@ class UserFixture extends BaseFixture
                 $user->setSurname($this->faker->lastName);
                 $user->setEmail($this->faker->email);
                 $user->setIsadmin();
-                $user->setRoles(['ROLE_USER']);
+                $user->setRoles(['ROLE_USER', 'ROLE_BUYER']);
                 $password = $this->encoder->encodePassword($user, '12345');
                 $user->setPassword($password);
             }

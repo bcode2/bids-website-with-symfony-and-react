@@ -113,20 +113,12 @@ class Asset
     public function getBids()
     {
         return $this->bids;
-
-        /*// autoload collection
-        foreach($this->bids as $bid)
-        {
-            $bid->initialize($level);
-        }*/
-
-        return $this->ownedCars;
     }
 
     /**
      * @param mixed $bids
      */
-    public function setBids($bids)
+    public function setBids($bids): void
     {
         $this->bids = $bids;
     }
@@ -143,7 +135,7 @@ class Asset
     /**
      * @param string $description
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -159,7 +151,7 @@ class Asset
     /**
      * @param DateTime $endDate
      */
-    public function setEndDate(DateTime $endDate)
+    public function setEndDate(DateTime $endDate): void
     {
         $this->endDate = $endDate;
     }

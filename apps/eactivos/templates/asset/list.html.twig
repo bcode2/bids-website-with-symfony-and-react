@@ -94,7 +94,7 @@
                     <td>
                         <ul class="text-left" style="display:inline;">
 
-                            {% if is_granted('ROLE_USER') %}
+                            {% if is_granted('ROLE_BUYER') %}
                                 <li style="display:inline-block;">
                                     <div>
                                         <form method="post" action="{{ path('bid_new') }}">
