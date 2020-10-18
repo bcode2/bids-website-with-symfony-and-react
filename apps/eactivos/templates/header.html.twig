@@ -1,126 +1,28 @@
-<nav class="navbar navbar-default navbar-fixed-top" >
-    <div class="container">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <a class="navbar-brand" href="/" style="padding: 0px 15px 0px 15px;">
-                <img class="visible-lg" src="{{ asset('img/logo-expanded.png') }}" alt="Activos Concursales" style="float: left;" border="0">
-                <img class="visible-md visible-sm visible-xs" src="{{ asset('img/logo-condensed.png') }}" alt="Activos Concursales" style="float: left;" border="0">
+                <img class="visible-lg" src="{{ asset('img/logo-expanded.png') }}" alt="Activos Concursales"
+                     style="float: left;" border="0">
+                <img class="visible-md visible-sm visible-xs" src="{{ asset('img/logo-condensed.png') }}"
+                     alt="Activos Concursales" style="float: left;" border="0">
             </a>
+            {% if (is_granted('ROLE_USER'))  or (is_granted('ROLE_ADMIN')) %}
+                <h4 style="display: inline-block">Bienvenido&nbsp;&nbsp;{{ app.user.name }}
+                    &nbsp;&nbsp;{{ app.user.surname }}</h4>
+            {% endif %}
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Categorías <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="/listado-de-liquidaciones.html">Ver todas</a></li>
-                        <li class="divider"></li>
-                        <li><a class="dropdown-item" href="/listado-de-viviendas.html">Viviendas</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-naves-industriales.html">Naves Industriales</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-terrenos.html">Terrenos</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-garajes.html">Garajes</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-trasteros.html">Trasteros</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-automocion-concursal.html">Automoción Concursal</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-locales.html">Locales</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-utillaje-y-herramientas.html">Utillaje y Herramientas</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-lotes-de-mobiliario.html">Lotes de Mobiliario</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-acciones.html">Acciones</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-aplicaciones-informaticas.html">Aplicaciones informáticas</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-coches.html">Coches</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-derechos-de-cobro-y-creditos.html">Derechos de cobro y créditos</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-lotes.html">Lotes</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-maquinaria.html">Maquinaria</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-mobiliario-de-oficina.html">Mobiliario de Oficina</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-participaciones.html">Participaciones</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-solares.html">Solares</a></li>
-                        <li><a class="dropdown-item" href="/listado-de-vehiculos.html">Vehículos</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Información de interés <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="/quienes-somos">Quiénes somos</a></li>
-                        <li><a href="/documents/Servicios_eActivos.pdf" target="_blank">Servicios</a></li>
-                        <li><a href="/iso-27001.html" target="_blank">Seguridad de la Información</a></li>
-                        <li><a href="/preguntas-frecuentes.html">Preguntas frecuentes</a></li>
-                        <li><a href="http://activosconcursales.com/sala-de-prensa/" target="_blank">Sala de prensa</a></li>
-                        <li><a href="/casos-de-exito.html">Casos de éxito</a></li>
-                        <li class="divider"></li>
-                        <li><a href="http://activosconcursales.com/" target="_blank">Gestión Concursal</a></li>
-                    </ul>
-                </li>
-                <li><a href="/contacto.html">Contacto</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-search"></span></a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input name="searchterm" type="text" class="form-control" placeholder="Búsqueda" style="min-width: 200px;">
-                                    <div class="input-group-addon" id="basic_search_form_button">Buscar</div>
-                                </div>
-                                <div class="hide" id="basic_search_form">
-                                    <form name="appbundle_lotelisttype" method="post" action="/listado-de-liquidaciones.html"><div id="appbundle_lotelisttype"><div class="form-group">
-                                                <label class="control-label" for="appbundle_lotelisttype_expression">
-                                                    Palabras clave
-                                                </label>
-                                                <input type="text" id="appbundle_lotelisttype_expression" name="appbundle_lotelisttype[expression]" class="form-control">
-
-                                            </div>    <div class="form-group">
-                                                <label class="hide control-label" for="appbundle_lotelisttype_estado">
-                                                    Estado
-                                                </label>
-                                                <select id="appbundle_lotelisttype_estado" name="appbundle_lotelisttype[estado][]" class="hide form-control" multiple="multiple"><option value="activo" selected="selected">Activos</option><option value="programado" selected="selected">Programados</option><option value="preparado" selected="selected">Próximos</option><option disabled="disabled">-------------------</option><option value="finalizado">Finalizados</option><option value="rematado">Rematados</option><option value="adjudicado">Adjudicados</option><option value="cerrado">Cerrados</option><option value="borrador">Borradores</option><option value="bloqueado">Bloqueados</option><option value="prolongado">Prolongados</option></select>
-
-                                            </div>    <div class="form-group">
-                                                <label class="hide control-label" for="appbundle_lotelisttype_other">
-                                                    Otras opciones
-                                                </label>
-                                                <select id="appbundle_lotelisttype_other" name="appbundle_lotelisttype[other][]" class="hide form-control" multiple="multiple"><option value="ending">A punto de finalizar</option><option value="starting">Públicadas recientemente</option><option value="successStories">Casos de éxito</option></select>
-
-                                            </div>    <div class="form-group">
-                                                <label class="control-label" for="appbundle_lotelisttype_year">
-                                                    Año
-                                                </label>
-                                                <select id="appbundle_lotelisttype_year" name="appbundle_lotelisttype[year][]" class="chosen-select form-control" data-placeholder="Elige" multiple="multiple" style="display: none;"><option value="2020">2020</option><option value="2019">2019</option><option value="2018">2018</option><option value="2017">2017</option><option value="2016">2016</option><option value="2015">2015</option><option value="2014">2014</option><option value="2013">2013</option><option value="2012">2012</option><option value="2011">2011</option></select><div class="chosen-container chosen-container-multi" style="width: 100%;" title="" id="appbundle_lotelisttype_year_chosen"><ul class="chosen-choices"><li class="search-field"><input type="text" value="Elige" class="default" autocomplete="off" style="width: 64px;"></li></ul><div class="chosen-drop"><ul class="chosen-results"></ul></div></div>
-
-                                            </div>    <div class="form-group">
-                                                <label class="hide control-label" for="appbundle_lotelisttype_countries">
-                                                    Elija un pais
-                                                </label>
-                                                <select id="appbundle_lotelisttype_countries" name="appbundle_lotelisttype[countries][]" class="hide form-control" data-placeholder="Elige" multiple="multiple"><option value="1" selected="selected">España</option></select>
-
-                                            </div><div class="form-group"><button type="submit" id="appbundle_lotelisttype_submit" name="appbundle_lotelisttype[submit]" class="btn-block btn-default btn" style="margin-top: 5px;">Buscar</button></div>            <input type="hidden" id="appbundle_lotelisttype__token" name="appbundle_lotelisttype[_token]" class="form-control" value="hLCj0jbO-x2cAQc33MDnNJVc0w4fDn1Tiqko3u2dMcw">
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav">
-                <li class="dropdown  translation-links lang-bar">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img alt="Spanish" title="Spanish" src="/bundles/app/images/flags/es.png"><span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu" style="min-width: 100%;">
-                        <li><a class="lang english" data-lang="en"><img alt="English" title="English" src="/bundles/app/images/flags/gb.png"></a></li>
-                        <li><a class="lang spanish" data-lang="es"><img alt="Spanish" title="Spanish" src="/bundles/app/images/flags/es.png"></a></li>
-                        <li><a class="lang french" data-lang="fr"><img alt="French" title="French" src="/bundles/app/images/flags/fr.png"></a></li>
-                        <li><a class="lang german" data-lang="de"><img alt="German" title="German" src="/bundles/app/images/flags/de.png"></a></li>
-                        <li><a class="lang arabic" data-lang="ar"><img alt="Arabic" title="Arabic" src="/bundles/app/images/flags/sa.png"></a></li>
-                        <li><a class="lang russian" data-lang="ru"><img alt="Russian" title="Russian" src="/bundles/app/images/flags/ru.png"></a></li>
-                        <li><a class="lang chinese" data-lang="zh-CN"><img alt="Chinese" title="Chinese" src="/bundles/app/images/flags/cn.png"></a></li>
-                    </ul>
-                </li>
-            </ul>
+        <div id="navbar">
             <ul class="nav navbar-nav pull-right">
-                <li><a href="/login"><span class="glyphicon glyphicon-log-in">&nbsp;</span>Acceso</a></li>
+                {% if (not is_granted('ROLE_USER')) and (app.request.get('_route') != 'user_login') %}
+                    <a href="{{ path('user_login') }}" class="btn btn-info" role="button"> &nbsp; <span
+                                class="fa fa-lock"> 	&nbsp;</span>Login</a>
+                {% endif %}
+                {% if (is_granted('ROLE_USER'))  or (is_granted('ROLE_ADMIN')) %}
+                    <a href="{{ path('user_logout') }}" class="btn btn-info" role="button"> &nbsp; <span
+                                class="fa fa-sign-out"> 	&nbsp;</span>Logout</a>
+                {% endif %}
             </ul>
-        </div><!--/.navbar-collapse -->
+        </div>
     </div>
 </nav>

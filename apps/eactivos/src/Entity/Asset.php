@@ -67,14 +67,17 @@ class Asset
         if ($this->bids->count() === 0) {
             return null;
         }
+
         $bestBid = null;
         $bestBidPrice = 0;
         $bidArray = $this->getBids();
+
 
         foreach ($bidArray as $bid) {
             $tempBidAmount = $bid->getBidAmount();
             if ($tempBidAmount >= $bestBidPrice) {
                 $bestBid = $bid;
+                $bestBidPrice = $tempBidAmount;
             }
         }
 

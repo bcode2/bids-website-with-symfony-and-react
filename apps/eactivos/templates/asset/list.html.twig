@@ -59,7 +59,8 @@
                         {% if asset.highestBid == null %}
                             <strong style="color:green"> Aún no hay pujas</strong>
                         {% else %}
-                            <strong style="color: #ff0000"> {{ asset.BestBid.bidAmount | format_currency('EUR', locale='de') }}</strong>&nbsp;&nbsp;({{ asset.BestBid.user.name }} {{ asset.BestBid.user.surname }})
+                            <strong style="color: #ff0000">
+                                {{ asset.BestBid.bidAmount | format_currency('EUR', locale='de') }}</strong>&nbsp;&nbsp;({{ asset.BestBid.user.name }} {{ asset.BestBid.user.surname }})
                         {% endif %}
                     </td>
                     <td>{{ asset.endDate | date("m/d/Y") }}</td>
@@ -92,21 +93,24 @@
                     {% endif %}
                     <td>
                         <ul class="text-left" style="display:inline;">
-                            <li style="display:inline-block;">
-                                <div>
-                                    <form method="post" action="{{ path('bid_new') }}">
-                                        <div>
-                                            <input name="bidAmount" size="5" type="number" required
-                                                   style="display:inline-block;">
-                                            <button style="display:inline-block;">Pujar</button>
-                                        </div>
-                                        <input type="hidden" name="_csrf_token"
-                                               value="{{ csrf_token('authenticate') }}">
-                                        <input type="hidden" name="asset_id" value="{{ asset.id }}">
-                                        <input type="hidden" name="user_id" value="{{ app.user.id }}">
-                                    </form>
-                                </div>
-                            </li>
+
+                            {% if is_granted('ROLE_USER') %}
+                                <li style="display:inline-block;">
+                                    <div>
+                                        <form method="post" action="{{ path('bid_new') }}">
+                                            <div>
+                                                <input name="bidAmount" size="5" type="number" min="1" required
+                                                       style="display:inline-block;">
+                                                <button style="display:inline-block;">Pujar</button>
+                                            </div>
+                                            <input type="hidden" name="_csrf_token"
+                                                   value="{{ csrf_token('authenticate') }}">
+                                            <input type="hidden" name="asset_id" value="{{ asset.id }}">
+                                            <input type="hidden" name="user_id" value="{{ app.user.id }}">
+                                        </form>
+                                    </div>
+                                </li>
+                            {% endif %}
                             {% if is_granted('ROLE_ADMIN') %}
 
                                 <li style="display:inline;">
