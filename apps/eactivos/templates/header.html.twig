@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top" style="margin-top: 20px;">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="/" style="padding: 0px 15px 0px 15px;">
@@ -11,18 +11,24 @@
                 <h4 style="display: inline-block">Bienvenido&nbsp;&nbsp;{{ app.user.name }}
                     &nbsp;&nbsp;{{ app.user.surname }}</h4>
             {% endif %}
-        </div>
-        <div id="navbar">
-            <ul class="nav navbar-nav pull-right">
+            <li class="list-inline-item">
+                <div id="react-user-bids-container"></div>
+            </li>
+
+            <ul class="nav navbar-nav pull-right list-inline">
+
                 {% if (not is_granted('ROLE_USER')) and (app.request.get('_route') != 'user_login') %}
-                    <a href="{{ path('user_login') }}" class="btn btn-info" role="button"> &nbsp; <span
-                                class="fa fa-lock"> 	&nbsp;</span>Login</a>
+                    <li class="list-inline-item">
+                        <a href="{{ path('user_login') }}" class="btn btn-info" role="button"> &nbsp; <span
+                                    class="fa fa-lock"> 	&nbsp;</span>Login</a>
+                    </li>
                 {% endif %}
                 {% if (is_granted('ROLE_USER'))  or (is_granted('ROLE_ADMIN')) %}
-                    <a href="{{ path('user_logout') }}" class="btn btn-info" role="button"> &nbsp; <span
-                                class="fa fa-sign-out"> 	&nbsp;</span>Logout</a>
+                    <li class="list-inline-item">
+                        <a href="{{ path('user_logout') }}" class="btn btn-info" role="button"> &nbsp; <span
+                                    class="fa fa-sign-out"> 	&nbsp;</span>Logout</a>
+                    </li>
                 {% endif %}
             </ul>
-        </div>
     </div>
 </nav>

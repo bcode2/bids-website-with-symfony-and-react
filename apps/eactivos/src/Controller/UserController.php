@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Form\LoginForm;
 use App\Form\UserType;
 use App\Services\UserService;
-use AppBundle\MOP\Services\BrandService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -37,7 +36,6 @@ class UserController extends AbstractController
      * @return Response
      */
     public function loginAction(
-        Request $request,
         AuthenticationUtils $authenticationUtils,
         UserPasswordEncoderInterface $encoder,
         UserService $userService
@@ -127,6 +125,10 @@ class UserController extends AbstractController
      */
     public function countUserBids(UserInterface $user): JsonResponse
     {
-        return new JsonResponse($user->getBids()->count());
+        $jsonResponse = new JsonResponse();
+        $jsonResponse->headers->set('Access-Control-Allow-Origin', '*');
+        $jsonResponse->setData($user->getBids()->count());
+
+        return $jsonResponse;
     }
 }

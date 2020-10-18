@@ -4,7 +4,8 @@
 <head>
     <title>{% block title %}Bienvenido a la página de subastas  online{% endblock %}</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> {% block stylesheets %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% block stylesheets %}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
               crossorigin="anonymous">
@@ -12,16 +13,19 @@
         <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
         <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css">
         <link href="https://fonts.googleapis.com/css?family=Barriecito|Nanum+Pen+Script&display=swap" rel="stylesheet">
+
+        {{ encore_entry_link_tags('app') }}
+
     {% endblock %}
 </head>
 
 <body style="position: relative; min-height: 100%; top: 0px;">
 <div class="appcontainer" style="text-align: center;min-width: 90%; ">
-       {% include 'header.html.twig' %}
+    {% include 'header.html.twig' %}
     {% block body %}{% endblock %}
     <footer margin-top: 25px;>
-    {% include 'oficinas.html.twig' %}
-    {% include 'footer.html.twig' %}
+        {% include 'oficinas.html.twig' %}
+        {% include 'footer.html.twig' %}
     </footer>
 </div>
 {% block javascripts %}
@@ -37,6 +41,8 @@
     <script>
         $('.dropdown-toggle').dropdown();
     </script>
+
+    {{ encore_entry_script_tags('app') }}
 {% endblock %}
 </body>
 </html>
