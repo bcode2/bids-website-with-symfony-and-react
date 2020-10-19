@@ -28,8 +28,6 @@ RUN yum install -y https://repo.mysql.com/mysql-community-minimal-release-el7.rp
   && yum clean all \
   && mkdir /docker-entrypoint-initdb.d
 
-VOLUME /var/lib/mysql
-
 COPY docker-entrypoint.sh /entrypoint.sh
 COPY healthcheck.sh /healthcheck.sh
 ENTRYPOINT ["/entrypoint.sh"]

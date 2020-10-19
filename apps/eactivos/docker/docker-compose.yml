@@ -63,10 +63,3 @@ services:
 networks:
     bids-network:
         driver: bridge
-
-#Volumes
-volumes:
-    bids-var:
-        driver_opts:
-            type: tmpfs
-            device: tmpfs
