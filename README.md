@@ -7,24 +7,22 @@ This project is part of the eactivos selection process as fullstack developer 20
  * DOCKER-COMPOSE
  * MYSQL 
  * BOOTSTRAP
- * REACT
+ * REACT (React-material, Axios)
  *
  *A live example in http://eactivos-test-code.bcode.es/
 
-In many cases the different commands and online references used through out the project may be consulted in the comments of the corresponding commit
-
 INSTRUCTIONS
 * 1-Create a folder
-* 2-Clone the repository 
-* https://github.com/bcode2/eactivos-interview-code-test.git
-* go to the docker folder and execute this command
-*  docker-compose up 
+* 2-Clone the repository https://github.com/bcode2/eactivos-interview-code-test.git
+* go to the docker folder and execute this command  docker-compose up 
 *Once all containers get running execute the following command to seed the database and create the vendor folder
 
-* docker-compose exec eactivos_apache composer update
-* docker-compose exec eactivos_apache php bin/console doctrine:database:create
-* docker-compose exec eactivos_apache php bin/console doctrine:schema:update --force
-* docker-compose exec eactivos_apache php bin/console doctrine:fixtures:load
+* docker-compose exec eactivos_php7 composer update
+* docker-compose exec eactivos_php7 php bin/console doctrine:database:create
+* docker-compose exec eactivos_php7 php bin/console doctrine:schema:update --force
+* docker-compose exec eactivos_php7 php bin/console doctrine:fixtures:load
+
+
 
 
 
