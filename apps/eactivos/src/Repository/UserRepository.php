@@ -24,6 +24,5 @@ class UserRepository extends EntityRepository
         $em = $this->getEntityManager();
 
         return $em->getRepository(User::class)->findOneBy(['email' => $email]);
-        // return $this->getRepository()->findOneBy(['email' => $email,]);
     }
 }

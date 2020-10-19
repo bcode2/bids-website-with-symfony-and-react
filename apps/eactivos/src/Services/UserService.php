@@ -16,9 +16,8 @@ class UserService extends AbstractEntityService
     /**
      * @param EntityManagerInterface $entityManager
      */
-    public function __construct(
-        EntityManagerInterface $entityManager
-    ) {
+    public function __construct(EntityManagerInterface $entityManager)
+    {
         parent::__construct($entityManager);
     }
 
@@ -34,8 +33,6 @@ class UserService extends AbstractEntityService
      */
     public function findOneById(int $id): User
     {
-        dump($this->getRepository()->find($id));
-
         return $this->getRepository()->find($id);
     }
 
