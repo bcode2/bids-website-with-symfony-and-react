@@ -1,7 +1,7 @@
-# eactivos-interview-code-test
-Required project for EACTIVOS company as software developer
+# interview-code-test
+Required project  for a software developer position
 
-This project is part of the eactivos selection process as fullstack developer 2020 
+This project is part of the selection process as fullstack developer 2020 
 * TECHNOLOGIES
  * SYMFONY 4.4;
  * DOCKER-COMPOSE
@@ -9,7 +9,7 @@ This project is part of the eactivos selection process as fullstack developer 20
  * BOOTSTRAP
  * REACT (React-material, Axios)
  *
- *A live example in http://eactivos-test-code.bcode.es/
+ *A live example in http://projects.bcode.es/bids
 
 INSTRUCTIONS
 * 1-Create a folder
