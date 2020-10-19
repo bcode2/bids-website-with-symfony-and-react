@@ -20,13 +20,19 @@ INSTRUCTIONS
 # 3---Nos posicionamos en la rama  develop 
 *Once all containers get running execute the following command to seed the database and create the vendor folder
 
+#Actualizamos el  fichero enviroment .env con los datos de nuestro docker de BBDD, si 
+# no funciona correctamente la resolución de nombres encuentra la IP asignada  a ese contenedor
+# deberas  tener  una configuración parecida a esta en el fichero .env
+DATABASE_URL=mysql://root:root@172.21.0.2:3306/bids?serverVersion=5.7
+
 # 4---Creamos/levantamos nuestros contenedores
 docker-compose up
 
 # 5---Entramos en el contenedor 
-docker-compose exec bids_php7 bash
+docker exec -it  bids_php7  bash
 
-# 6---Nos posicionamos en la carpeta del proyecto
+# 6---Nos posicionamos en la carpeta raiz del servidor (root@6607442475fb:/var/www/html# ) 
+cd ../
 
 # 7---Actualizamos  la carpeta vendor  y todas  las dependencias de php
 composer update
