@@ -13,14 +13,14 @@ This project is part of the selection process as fullstack developer 2020
 
 INSTRUCTIONS
 * 1-Create a folder
-* 2-Clone the repository https://github.com/bcode2/eactivos-interview-code-test.git
+* 2-Clone the repository https://github.com/bcode2/bids-website-with-symfony-and-react.git
 * go to the docker folder and execute this command  docker-compose up 
 *Once all containers get running execute the following command to seed the database and create the vendor folder
 
-* docker-compose exec eactivos_php7 composer update
-* docker-compose exec eactivos_php7 php bin/console doctrine:database:create
-* docker-compose exec eactivos_php7 php bin/console doctrine:schema:update --force
-* docker-compose exec eactivos_php7 php bin/console doctrine:fixtures:load
+* docker-compose exec bids_php7 composer update
+* docker-compose exec bids_php7 php bin/console doctrine:database:create
+* docker-compose exec bids_php7 php bin/console doctrine:schema:update --force
+* docker-compose exec bids_php7 php bin/console doctrine:fixtures:load
 
 
 
