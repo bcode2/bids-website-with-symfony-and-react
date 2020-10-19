@@ -1,0 +1,11 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/eactivos/public/build/runtime.js",
+        "/eactivos/public/build/vendors~app.js",
+        "/eactivos/public/build/app.js"
+      ]
+    }
+  }
+}

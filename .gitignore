@@ -59,3 +59,9 @@
 .idea/php.xml
 .idea/vcs.xml
 
+docker/dbdata/
+public/js/
+src/Datatable/
+src/Doctrine/
+src/Resources/
+src/Util/
