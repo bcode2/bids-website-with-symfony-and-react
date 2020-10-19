@@ -20,7 +20,7 @@ class UserFixture extends BaseFixture
         $user = new User();
         $user->setName("Admin");
         $user->setSurname("User");
-        $user->setEmail("admin@eactivos.com");
+        $user->setEmail("admin@bcode.es");
         $user->setPassword('password');
         $user->setIsAdmin(true);
         $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
@@ -31,7 +31,7 @@ class UserFixture extends BaseFixture
         $user = new User();
         $user->setName("Normal");
         $user->setSurname("User");
-        $user->setEmail("user@eactivos.com");
+        $user->setEmail("user@bcode.es");
         $user->setPassword('12345');
         $user->setIsAdmin(true);
         $user->setRoles(['ROLE_USER', 'ROLE_BUYER']);
