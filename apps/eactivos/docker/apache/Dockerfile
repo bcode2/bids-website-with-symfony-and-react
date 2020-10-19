@@ -1,4 +1,4 @@
-FROM ubuntu:xenial as eactivos_apache
+FROM ubuntu:xenial as bids_apache
 
 ENV OS_LOCALE="es_ES.UTF-8"
 RUN apt-get update && apt-get install -y locales && locale-gen es_ES.UTF-8
@@ -21,7 +21,7 @@ RUN	BUILD_DEPS='software-properties-common python-software-properties' \
 
 # Apache settings
 COPY 000-default.conf /etc/apache2/sites-enabled/000-default.conf
-COPY eactivos.local.conf /etc/apache2/sites-enabled/eactivos.local.conf
+COPY bids.local.conf /etc/apache2/sites-enabled/bids.local.conf
 
 RUN a2enmod proxy proxy_fcgi proxy_http proxy_balancer lbmethod_byrequests rewrite
 

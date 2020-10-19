@@ -1,6 +1,6 @@
 version: '3.7'
 services:
-    eactivos_bd:
+    bids_bd:
         image: mysql:5.7.31
         container_name: ${CONTAINER_REGISTRY_BASE}_bd
         build:
@@ -9,22 +9,22 @@ services:
         env_file:
             - .env
         ports:
-            - "3306:3306"
+            - "3333:3306"
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
             MYSQL_DATABASE: ${DATABASE_NAME_SYSTEM}
             MYSQL_USER: ${DATABASE_USER_SYSTEM}
             MYSQL_PASSWORD: ${DATABASE_PASS_SYSTEM}
         networks:
-            - eactivos-network
+            - bids-network
 
-    eactivos_php7:
+    bids_php7:
         image: ${CONTAINER_REGISTRY_BASE}/php7-fpm
         user: $UID:$GID
         stdin_open: true
         container_name: ${CONTAINER_REGISTRY_BASE}_php7
         build:
-            target: eactivos_php-fpm
+            target: bids_php-fpm
             context: php7-fpm
             args:
                 TIMEZONE: ${TIMEZONE}
@@ -32,49 +32,41 @@ services:
             - .env
         volumes:
             - ${DIRECTORY_WEB}:/var/www/html
-            - /etc/group:/etc/group:ro
-            - /etc/passwd:/etc/passwd:ro
-            - /etc/shadow:/etc/shadow:ro
-            - /home/${USER}:/home/${USER}
-            - eactivos-var:/var/www/html/eactivos/var/cache
-            - eactivos-var:/var/www/html/eactivos/var/logs
-            - eactivos-var:/var/www/html/eactivos/var/spool
-            - eactivos-var:/var/www/html/eactivos/var/sessions
         links:
-            - eactivos_bd
+            - bids_bd
         depends_on:
-            - eactivos_bd
+            - bids_bd
         tty: true
         networks:
-            - eactivos-network
+            - bids-network
 
-    eactivos_apache:
+    bids_apache:
         image: ${CONTAINER_REGISTRY_BASE}/apache_php7
         container_name: ${CONTAINER_REGISTRY_BASE}_apache
         env_file:
             - .env
         build:
             context: apache
-            target: eactivos_apache
+            target: bids_apache
         links:
-            - eactivos_php7
+            - bids_php7
         depends_on:
-            - eactivos_php7
+            - bids_php7
         restart: always
         volumes:
             - ${DIRECTORY_WEB}:/var/www/html
         ports:
-            - "8089:80"
+            - "5555:80"
         networks:
-            - eactivos-network
+            - bids-network
 #Docker Networks
 networks:
-    eactivos-network:
+    bids-network:
         driver: bridge
 
 #Volumes
 volumes:
-    eactivos-var:
+    bids-var:
         driver_opts:
             type: tmpfs
             device: tmpfs

@@ -1,4 +1,4 @@
-FROM php:7.2-fpm as eactivos_php-fpm
+FROM php:7.2-fpm as bids_php-fpm
 ARG TIMEZONE
 
 MAINTAINER BCODE
@@ -102,10 +102,10 @@ RUN apt-get update && apt-get install -y nano
 RUN echo 'alias sf="php bin/console"' >> ~/.bashrc
 RUN echo 'alias ll="ls -lah"' >> ~/.bashrc
 
-COPY eactivos.ini /usr/local/etc/php/conf.d/
+COPY bids.ini /usr/local/etc/php/conf.d/
 
 #Directorio trabajo.
-WORKDIR /var/www/html/eactivos
+WORKDIR /var/www/html/bids
 
 RUN set -eux; \
 	mkdir -p var/cache && chmod -R 777 var/cache; \

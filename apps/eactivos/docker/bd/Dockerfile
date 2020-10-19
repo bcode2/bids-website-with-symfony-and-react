@@ -12,7 +12,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
-FROM oraclelinux:7-slim as  eactivos_bd
+FROM oraclelinux:7-slim as  bids_bd
 
 ARG MYSQL_SERVER_PACKAGE=mysql-community-server-minimal-5.7.31
 ARG MYSQL_SHELL_PACKAGE=mysql-shell-8.0.21
