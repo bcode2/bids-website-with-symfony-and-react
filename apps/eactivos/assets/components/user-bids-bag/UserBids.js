@@ -14,7 +14,7 @@ class UserBids extends Component {
     }
 
     getUserBids() {
-        axios.get(`/eactivos/public/user/ajax-bids-count`).then(data => {
+        axios.get(`/public/user/ajax-bids-count`).then(data => {
             this.setState({userBidsCount: data.data, loading: false})
         })
     }
