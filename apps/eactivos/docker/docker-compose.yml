@@ -7,7 +7,7 @@ services:
             target: ${CONTAINER_REGISTRY_BASE}_bd
             context: bd
         env_file:
-            - ./.env
+            - .env
         ports:
             - "3306:3306"
         environment:
@@ -29,7 +29,7 @@ services:
             args:
                 TIMEZONE: ${TIMEZONE}
         env_file:
-            - ./.env
+            - .env
         volumes:
             - ${DIRECTORY_WEB}:/var/www/html
             - /etc/group:/etc/group:ro
@@ -52,7 +52,7 @@ services:
         image: ${CONTAINER_REGISTRY_BASE}/apache_php7
         container_name: ${CONTAINER_REGISTRY_BASE}_apache
         env_file:
-            - ./.env
+            - .env
         build:
             context: apache
             target: eactivos_apache
