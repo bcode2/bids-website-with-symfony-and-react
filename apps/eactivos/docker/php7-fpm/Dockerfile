@@ -105,7 +105,7 @@ RUN echo 'alias ll="ls -lah"' >> ~/.bashrc
 COPY bids.ini /usr/local/etc/php/conf.d/
 
 #Directorio trabajo.
-WORKDIR /var/www/html/bids
+WORKDIR /var/www/html
 
 RUN set -eux; \
 	mkdir -p var/cache && chmod -R 777 var/cache; \
