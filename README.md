@@ -9,7 +9,7 @@ This project is part of the eactivos selection process as fullstack developer 20
  * BOOTSTRAP
  * REACT
  *
- *A live example in http://proyects.bcode.es/eactivos
+ *A live example in http://eactivos-test-code.bcode.es/
 
 In many cases the different commands and online references used through out the project may be consulted in the comments of the corresponding commit
 
